@@ -1,20 +1,48 @@
-<div class=".wrapper">
-    
-    <div class=".post">
-        <h3>{{this.post.title}}</h3>
-        <i>von {{this.post.username}} am {{this.post.postTime}}</i>
-        <p>{{this.post.text}}</p>
-    </div>
+<ul>
+    <li>
+        <mat-card>
+            <h3>{{this.post.title}}</h3>
+            <i>von {{this.post.username}} am {{this.post.postTime}}</i>
+            <button mat-fab color="accent">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-fab color="accent">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <p>{{this.post.text}}</p>
+        </mat-card>
 
-    <ul>
-        <li *ngFor="let comment of comments">
-            <mat-divider></mat-divider>
-            <div>
-                <p><i>von {{comment.username}} am {{comment.commentTime}}</i></p>
-                <p>
-                    {{comment.text}}
-                </p>
-            </div>
-        </li>
-    </ul>
-</div>
+        <ul>
+            <li *ngFor="let comment of comments">
+                <div>
+                    <p>
+                        <i>von {{comment.username}} am {{comment.commentTime}}</i>
+                        <button mat-fab color="accent">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-fab color="accent">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </p>
+                    <p>
+                        {{comment.text}}
+                    </p>
+                </div>
+                <mat-divider></mat-divider>
+            </li>
+            <li>
+                <div>
+                    <mat-form-field>
+                        <input matInput #newUser placeholder="Name">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <textarea matInput #newComment placeholder="Kommentar"></textarea>
+                    </mat-form-field>
+                    <button mat-fab color="accent">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
