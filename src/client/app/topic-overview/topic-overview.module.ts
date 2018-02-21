@@ -1,4 +1,4 @@
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { TopicOverviewRoutingModule } from './topic-overview-routing.module';
 import { NgModule } from '@angular/core';
 import { TopicOverviewComponent } from './topic-overview.component';
@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        MatIconModule
     ],
     declarations: [TopicOverviewComponent],
     exports: [TopicOverviewComponent]

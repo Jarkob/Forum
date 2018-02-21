@@ -22,3 +22,11 @@ mat-form-field {
 form input, form textarea {
     width: 100%;
 }
+
+.right {
+    /* Verzweiflung
+    position: absolute;
+    right: 0;
+    left: auto;
+    display: inline-block; */
+}

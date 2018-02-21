@@ -3,7 +3,17 @@
 <ul>
     <li *ngFor="let post of posts">
         <mat-card [routerLink]="['/post-view', post.id]">
-            {{post.title}} von {{post.username}} am {{post.postTime}}
+            <div>
+                {{post.title}} von {{post.username}} am {{post.postTime}}
+            </div>
+            <div>
+                <button mat-fab color="accent">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-fab color="accent">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
         </mat-card>
     </li>
 </ul>
@@ -27,7 +37,7 @@
         </mat-form-field>
     </div>
 
-    <button mat-raised-button color="primary" (click)="createPost(newTitle, newText, newUser)">
-        Neuen Post anlegen
+    <button mat-fab color="accent" (click)="createPost(newTitle, newText, newUser)">
+        <mat-icon>add</mat-icon>
     </button>
 </form>

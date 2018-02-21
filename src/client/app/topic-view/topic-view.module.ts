@@ -3,7 +3,7 @@ import { TopicViewRoutingModule } from './topic-view-routing.module';
 import { NgModule } from '@angular/core';
 import { TopicViewComponent } from './topic-view.component';
 import { PostViewModule } from '../post-view/post-view.module';
-import { MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatIconModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -13,7 +13,8 @@ import { MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule } fr
         MatCardModule,
         MatInputModule,
         MatFormFieldModule,
-        MatButtonModule
+        MatButtonModule,
+        MatIconModule
     ],
     declarations: [TopicViewComponent],
     exports: [TopicViewComponent]

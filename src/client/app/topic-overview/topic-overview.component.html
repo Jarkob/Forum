@@ -11,7 +11,7 @@
     <mat-form-field>
         <input matInput #newThema placeholder="Neues Thema">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="createTopic(newThema.value)">
-        Neues Thema anlegen
+    <button mat-fab color="accent" (click)="createTopic(newThema.value)">
+        <mat-icon>add</mat-icon>
     </button>
 </form>
