@@ -1,0 +1,33 @@
+<h2>{{this.topic.title}}</h2>
+
+<ul>
+    <li *ngFor="let post of posts">
+        <mat-card [routerLink]="['/post-view', post.id]">
+            {{post.title}} von {{post.username}} am {{post.postTime}}
+        </mat-card>
+    </li>
+</ul>
+
+<form>
+    <div>
+        <mat-form-field>
+            <input matInput #newTitle placeholder="Titel">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <textarea matInput #newText placeholder="Inhalt"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput #newUser placeholder="Name">
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="createPost(newTitle, newText, newUser)">
+        Neuen Post anlegen
+    </button>
+</form>

@@ -1,0 +1,27 @@
+ul {
+    list-style-type: none;
+    padding: 1em;
+}
+
+mat-card {
+    cursor: pointer;
+}
+
+input {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+form, h2 {
+    padding: 1em;
+}
+
+/* a {
+    color: #000;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+} */

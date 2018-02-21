@@ -1,0 +1,16 @@
+ul {
+    list-style-type: none;
+    padding: 1em;
+}
+
+input {
+    width: 100%;
+}
+
+form, h2 {
+    padding: 1em;
+}
+
+.wrapper, .post {
+    padding: 1em;
+}

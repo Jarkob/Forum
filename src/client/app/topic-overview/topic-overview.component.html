@@ -1,0 +1,17 @@
+<h2>Themen</h2>
+<ul>
+    <li *ngFor="let topic of topics">
+        <mat-card [routerLink]="['/topic-view', topic.id]">
+            {{topic.title}}
+        </mat-card>
+    </li>
+</ul>
+
+<form>
+    <mat-form-field>
+        <input matInput #newThema placeholder="Neues Thema">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="createTopic(newThema.value)">
+        Neues Thema anlegen
+    </button>
+</form>

@@ -1,0 +1,20 @@
+<div class=".wrapper">
+    
+    <div class=".post">
+        <h3>{{this.post.title}}</h3>
+        <i>von {{this.post.username}} am {{this.post.postTime}}</i>
+        <p>{{this.post.text}}</p>
+    </div>
+
+    <ul>
+        <li *ngFor="let comment of comments">
+            <mat-divider></mat-divider>
+            <div>
+                <p><i>von {{comment.username}} am {{comment.commentTime}}</i></p>
+                <p>
+                    {{comment.text}}
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
