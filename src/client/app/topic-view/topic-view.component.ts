@@ -98,15 +98,15 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         post.username = username;
         post.topicId = this.topic.id;
 
-        post.id = 0;
-        post.status = 'Open';
-        post.postTime = 'jetzt';
-        post.timeDifference = 'a lot';
+        // post.id = 0;
+        // post.status = 'Open';
+        // post.postTime = 'jetzt';
+        // post.timeDifference = 'a lot';
 
         console.log(post);
 
         this._postService.createPost(post).subscribe(
-            data => this.posts.push(data)
+            // data => this.posts.push(data)
         );
 
         this.posts.push(post);

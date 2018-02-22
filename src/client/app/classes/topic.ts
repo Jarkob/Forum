@@ -1,4 +1,3 @@
-import { Post } from './post';
 
 export class Topic {
 

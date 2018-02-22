@@ -58,8 +58,22 @@ export class TopicOverviewComponent implements OnInit {
         const topic: Topic = new Topic();
         topic.title = title;
 
+        // this._topicService.createTopic(topic).subscribe(
+        //     data => {
+        //         this.topics.push(data);
+        //     }
+        // );
+
         this._topicService.createTopic(topic).subscribe(
-            data => this.topics.push(data)
+            // (val) => {
+            //     console.log('POST call successful value returned in body', val);
+            // },
+            // response => {
+            //     console.log('POST call in error', response);
+            // },
+            // () => {
+            //     console.log('The POST observable is now completed.');
+            // }
         );
 
         this.topics.push(topic);
