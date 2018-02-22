@@ -16,12 +16,7 @@ export class TopicOverviewComponent implements OnInit {
     constructor(private _topicService: TopicService) { }
 
     ngOnInit(): void {
-        this._topicService.getTopics().subscribe(
-            data => {
-                console.log(data);
-                this.topics = data;
-            }
-        );
+        this.getTopics();
 
         // without backend mock data
         // this.topics = [
@@ -49,6 +44,16 @@ export class TopicOverviewComponent implements OnInit {
     }
 
 
+    private getTopics() {
+        this._topicService.getTopics().subscribe(
+            data => {
+                console.log(data);
+                this.topics = data;
+            }
+        );
+    }
+
+
     private createTopic(title: string): void {
         const topic: Topic = new Topic();
         topic.title = title;
@@ -60,15 +65,26 @@ export class TopicOverviewComponent implements OnInit {
         this.topics.push(topic);
     }
 
-    private updateTopic(topicId: number, topic: string): void {
-        // this.topics.find()
 
-        // this._topicService.updateTopic(topic).subscribe(
-        //     data => console.log('updated data: ' + data)
-        // );
+    private updateTopic(topicId: number, newTitle: string): void {
+        // this.topics.find()
+        let topic: Topic = new Topic();
+        this.topics.forEach(element => {
+            if (element.id === topicId) {
+                topic = element;
+            }
+        });
+
+        topic.title = newTitle;
+
+        this._topicService.updateTopic(topic).subscribe(
+            data => console.log('updated data: ' + data)
+        );
     }
 
     private deleteTopic(id: number): void {
         this._topicService.deleteTopic(id).subscribe();
+
+        this.getTopics();
     }
 }
