@@ -5,6 +5,7 @@ import { Post } from '../classes/post';
 import { CommentService } from '../services/comment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../services/post.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +19,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private sub: any;
 
     private editMode = false;
-    // private updatedComment = '';
 
     private post: Post;
     private comments: Comment[] = [];
@@ -26,7 +26,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
     constructor(private router: Router,
         private route: ActivatedRoute,
         private _postService: PostService,
-        private _commentService: CommentService) { }
+        private _commentService: CommentService,
+        public dialog: MatDialog
+    ) { }
 
     ngOnInit() {
         this.getPost();

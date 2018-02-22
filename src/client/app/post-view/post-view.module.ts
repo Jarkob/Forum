@@ -1,4 +1,12 @@
-import { MatCardModule, MatDividerModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {
+    MatCardModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule
+ } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PostViewRoutingModule } from './post-view-routing.module';
@@ -13,7 +21,8 @@ import { PostViewComponent } from './post-view.component';
         MatButtonModule,
         MatIconModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatDialogModule
     ],
     declarations: [PostViewComponent],
     exports: [PostViewComponent]
