@@ -6,6 +6,10 @@
             <button mat-fab color="accent" (click)="updatePost('Test für upgedateten Post')">
                 <mat-icon>edit</mat-icon>
             </button>
+            <button mat-fab color="accent" (click)="closePost()">
+                <mat-icon *ngIf="post.status === 'Closed'">lock</mat-icon>
+                <mat-icon *ngIf="post.status === 'Open'">lock_open</mat-icon>
+            </button>
             <button mat-fab color="accent" (click)="deletePost()">
                 <mat-icon>delete</mat-icon>
             </button>
@@ -17,15 +21,21 @@
                 <div>
                     <p>
                         <i>von {{comment.username}} am {{comment.commentTime}}</i>
-                        <button mat-fab color="accent" (click)="updateComment(comment.id, 'TestUpdateComment')">
-                            <mat-icon>edit</mat-icon>
+                        <button mat-fab color="accent" (click)="updateComment(comment.id)">
+                            <mat-icon *ngIf="!editMode">edit</mat-icon>
+                            <mat-icon *ngIf="editMode">save</mat-icon>
                         </button>
                         <button mat-fab color="accent" (click)="deleteComment(comment.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </p>
-                    <p>
+                    <p *ngIf="!editMode">
                         {{comment.text}}
+                    </p>
+                    <p *ngIf="editMode">
+                        <mat-form-field>
+                            <textarea matInput [(value)]="comment.text" placeholder="Bearbeiten"></textarea>
+                        </mat-form-field>
                     </p>
                 </div>
                 <mat-divider></mat-divider>

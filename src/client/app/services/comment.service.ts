@@ -13,26 +13,21 @@ export class CommentService {
     constructor(private http: HttpClient) {}
 
     public getComments(postId: number): Observable<Comment[]> {
-        return this.http.get<Comment[]>('http://' + restIP + ':50988/forum/comments/' + postId);
-    }
-
-
-    public getComment(id: number): Observable<Comment> {
-        return this.http.get<Comment>('http://' + restIP + ':50988/forum/comment/' + id);
+        return this.http.get<Comment[]>('http://' + restIP + ':50988/forum/comment/' + postId);
     }
 
 
     public createComment(comment: Comment): Observable<Comment> {
-        return this.http.post<Comment>('http://' + restIP + ':50988/forum/comments', comment, httpOptions);
+        return this.http.post<Comment>('http://' + restIP + ':50988/forum/comment', comment, httpOptions);
     }
 
 
     public updateComment(comment: Comment): Observable<Comment> {
-        return this.http.put<Comment>('http://' + restIP + ':50988/forum/comments', comment);
+        return this.http.put<Comment>('http://' + restIP + ':50988/forum/comment', comment);
     }
 
 
     public deleteComment(id: number): Observable<{}> {
-        return this.http.delete('http://' + restIP + ':50988/forum/comments/' + id);
+        return this.http.delete('http://' + restIP + ':50988/forum/comment/' + id);
     }
 }

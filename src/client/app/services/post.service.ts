@@ -23,16 +23,16 @@ export class PostService {
 
 
     public createPost(post: Post): Observable<Post> {
-        return this.http.post<Post>('http://' + restIP + ':50988/forum/posts', post, httpOptions);
+        return this.http.post<Post>('http://' + restIP + ':50988/forum/post', post, httpOptions);
     }
 
 
     public updatePost(post: Post): Observable<Post> {
-        return this.http.put<Post>('http://' + restIP + ':50988/forum/posts', post);
+        return this.http.put<Post>('http://' + restIP + ':50988/forum/post', post);
     }
 
 
     public deletePost(id: number): Observable<{}> {
-        return this.http.delete('http://' + restIP + ':50988/forum/posts/' + id);
+        return this.http.delete('http://' + restIP + ':50988/forum/post/' + id);
     }
 }
