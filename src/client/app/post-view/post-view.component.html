@@ -3,10 +3,10 @@
         <mat-card>
             <h3>{{this.post.title}}</h3>
             <i>von {{this.post.username}} am {{this.post.postTime}}</i>
-            <button mat-fab color="accent">
+            <button mat-fab color="accent" (click)="updatePost('Test für upgedateten Post')">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-fab color="accent">
+            <button mat-fab color="accent" (click)="deletePost()">
                 <mat-icon>delete</mat-icon>
             </button>
             <p>{{this.post.text}}</p>
@@ -38,7 +38,7 @@
                     <mat-form-field>
                         <textarea matInput #newComment placeholder="Kommentar"></textarea>
                     </mat-form-field>
-                    <button mat-fab color="accent">
+                    <button mat-fab color="accent" (click)="createComment(newUser.value, newComment.value)">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>

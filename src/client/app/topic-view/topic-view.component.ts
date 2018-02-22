@@ -81,14 +81,34 @@ export class TopicViewComponent implements OnInit, OnDestroy {
 
 
     private createPost(title: string, text: string, username: string): void {
-        const post = {
-            title: title,
-            text: text,
-            status: 'open',
-            postTime: 'jetzt',
-            username: username
-        };
+        // const post = {
+        //     id: 0,
+        //     topicId: 0,
+        //     title: 'Frage zu Aufgabe 2',
+        //     text: 'Wieso sollen wir das machen?',
+        //     status: 'Open',
+        //     postTime: 'jetzt',
+        //     timeDifference: 'groß',
+        //     username: 'Jakob'
+        // };
 
-        console.log('TODO: create new post: ' + post);
+        const post: Post = new Post();
+        post.title = title;
+        post.text = text;
+        post.username = username;
+        post.topicId = this.topic.id;
+
+        post.id = 0;
+        post.status = 'Open';
+        post.postTime = 'jetzt';
+        post.timeDifference = 'a lot';
+
+        console.log(post);
+
+        this._postService.createPost(post).subscribe(
+            data => this.posts.push(data)
+        );
+
+        this.posts.push(post);
     }
 }

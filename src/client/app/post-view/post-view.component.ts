@@ -3,7 +3,7 @@ import { Comment } from './../classes/comment';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Post } from '../classes/post';
 import { CommentService } from '../services/comment.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../services/post.service';
 
 @Component({
@@ -20,24 +20,13 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private post: Post;
     private comments: Comment[] = [];
 
-    constructor(private route: ActivatedRoute, private _postService: PostService, private _commentService: CommentService) { }
+    constructor(private router: Router,
+        private route: ActivatedRoute,
+        private _postService: PostService,
+        private _commentService: CommentService) { }
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            this.id = +params['id'];
-
-            this._postService.getPost(this.id).subscribe(
-                data => {
-                    this.post = data;
-                    this._commentService.getComments(this.post.id).subscribe(
-                        data => {
-                            this.comments = data;
-                        }
-                    );
-                }
-            );
-        });
-
+        this.getPost();
 
         // without backend mock data
         // this.post = {
@@ -113,5 +102,78 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+
+    private getPost() {
+        this.sub = this.route.params.subscribe(params => {
+            this.id = +params['id'];
+
+            this._postService.getPost(this.id).subscribe(
+                data => {
+                    this.post = data;
+                    this._commentService.getComments(this.post.id).subscribe(
+                        data => {
+                            this.comments = data;
+                        }
+                    );
+                }
+            );
+        });
+    }
+
+
+    private updatePost(text: string) {
+        this.post.text = text;
+
+        this._postService.updatePost(this.post).subscribe(
+            data => console.log('updated data: ' + data)
+        );
+
+        console.log(this.post);
+    }
+
+
+    private deletePost() {
+        this._postService.deletePost(this.post.id).subscribe();
+
+        this.router.navigate(['/']);
+    }
+
+
+    private createComment(username: string, text: string): void {
+        const comment: Comment = new Comment();
+        comment.postId = this.post.id;
+        comment.text = text;
+        comment.username = username;
+
+        this._commentService.createComment(comment).subscribe(
+            data => this.comments.push(data)
+        );
+
+        this.comments.push(comment);
+    }
+
+
+    private updateComment(id: number, text: string): void {
+        let comment: Comment = new Comment();
+        this.comments.forEach(element => {
+            if (element.id === id) {
+                comment = element;
+            }
+        });
+
+        comment.text = text;
+
+        this._commentService.updateComment(comment).subscribe(
+            data => console.log('updated data: ' + data)
+        );
+    }
+
+
+    private deleteTopic(id: number): void {
+        this._commentService.deleteComment(id).subscribe();
+
+        this.getPost();
     }
 }

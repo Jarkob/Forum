@@ -35,7 +35,8 @@ export class TopicService {
     //     return this.http.post<Topic>('http://' + restIP + ':50988/forum/topic', topic, httpOptions);
     // }
 
-    public createTopic(topic: Topic) {
+
+    public createTopic(topic: Topic): Observable<Topic> {
         // let body: string = JSON.stringify(topic);
         // let headers = new Headers({ 'Content-Type': 'application/json' });
         // let options = new RequestOptions({ headers: headers });
@@ -48,6 +49,7 @@ export class TopicService {
         //   };
         return this.http.post<Topic>('http://' + restIP + ':50988/forum/topic', topic, httpOptions);
     }
+
 
     public createPost(post: any): Observable<any> {
         const httpOptions = {
@@ -63,9 +65,11 @@ export class TopicService {
           }, httpOptions);
     }
 
+
     public updateTopic(topic: Topic): Observable<Topic> {
         return this.http.put<Topic>('http://' + restIP + ':50988/forum/topic/' + topic.id, topic);
     }
+
 
     public deleteTopic(id: number): Observable<{}> {
         return this.http.delete('http://' + restIP + ':50988/forum/topic/' + id);
