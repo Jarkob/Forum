@@ -2,7 +2,15 @@
 <ul>
     <li *ngFor="let topic of topics">
         <mat-card [routerLink]="['/topic-view', topic.id]">
-            {{topic.title}}
+            <div>{{topic.title}}</div>
+            <div>
+                <button mat-fab color="accent" (click)="editTopic(topic.id, 'Test update put')">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-fab color="accent" (click)="deleteTopic(topic.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
         </mat-card>
     </li>
 </ul>

@@ -24,28 +24,28 @@ export class TopicOverviewComponent implements OnInit {
         );
 
         // without backend mock data
-        this.topics = [
-            {
-                id: 1,
-                title: 'Hausaufgaben'
-            },
-            {
-                id: 2,
-                title: 'Klausuren'
-            },
-            {
-                id: 3,
-                title: 'Fahrgemeinschaften'
-            },
-            {
-                id: 4,
-                title: 'Klatsch und Tratsch'
-            },
-            {
-                id: 5,
-                title: 'Sport'
-            }
-        ];
+        // this.topics = [
+        //     {
+        //         id: 1,
+        //         title: 'Hausaufgaben'
+        //     },
+        //     {
+        //         id: 2,
+        //         title: 'Klausuren'
+        //     },
+        //     {
+        //         id: 3,
+        //         title: 'Fahrgemeinschaften'
+        //     },
+        //     {
+        //         id: 4,
+        //         title: 'Klatsch und Tratsch'
+        //     },
+        //     {
+        //         id: 5,
+        //         title: 'Sport'
+        //     }
+        // ];
     }
 
 
@@ -53,24 +53,19 @@ export class TopicOverviewComponent implements OnInit {
         const topic: Topic = new Topic();
         topic.title = title;
 
-        console.log(topic);
-
         this._topicService.createTopic(topic).subscribe(
             data => this.topics.push(data)
         );
 
-        // this._topicService.createPost(topic).subscribe(
-        //     data => console.log('created post: '+ data)
-        // );
-
-        console.log('neue Topic angelegt');
         this.topics.push(topic);
     }
 
-    private updateTopic(topic: Topic): void {
-        this._topicService.updateTopic(topic).subscribe(
-            data => console.log('updated data: ' + data)
-        );
+    private updateTopic(topicId: number, topic: string): void {
+        // this.topics.find()
+
+        // this._topicService.updateTopic(topic).subscribe(
+        //     data => console.log('updated data: ' + data)
+        // );
     }
 
     private deleteTopic(id: number): void {
