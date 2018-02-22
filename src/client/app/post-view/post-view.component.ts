@@ -125,12 +125,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
     private updatePost(text: string) {
         this.post.text = text;
-
-        this._postService.updatePost(this.post).subscribe(
-            data => console.log('updated data: ' + data)
-        );
-
-        console.log(this.post);
+        this._postService.updatePost(this.post).subscribe();
     }
 
 
@@ -147,9 +142,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
         comment.text = text;
         comment.username = username;
 
-        this._commentService.createComment(comment).subscribe(
-            data => this.comments.push(data)
-        );
+        this._commentService.createComment(comment).subscribe();
 
         this.comments.push(comment);
     }
@@ -165,13 +158,11 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
         comment.text = text;
 
-        this._commentService.updateComment(comment).subscribe(
-            data => console.log('updated data: ' + data)
-        );
+        this._commentService.updateComment(comment).subscribe();
     }
 
 
-    private deleteTopic(id: number): void {
+    private deleteComment(id: number): void {
         this._commentService.deleteComment(id).subscribe();
 
         this.getPost();

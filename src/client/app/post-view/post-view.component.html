@@ -17,10 +17,10 @@
                 <div>
                     <p>
                         <i>von {{comment.username}} am {{comment.commentTime}}</i>
-                        <button mat-fab color="accent">
+                        <button mat-fab color="accent" (click)="updateComment(comment.id, 'TestUpdateComment')">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-fab color="accent">
+                        <button mat-fab color="accent" (click)="deleteComment(comment.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </p>

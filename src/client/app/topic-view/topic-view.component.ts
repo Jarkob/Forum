@@ -28,7 +28,6 @@ export class TopicViewComponent implements OnInit, OnDestroy {
 
             this._topicService.getTopic(this.id).subscribe(
                 data => {
-                    console.log('Topic wurde erfolgreich geladen' + this.id);
                     this.topic = data;
                 }
             );
@@ -81,33 +80,13 @@ export class TopicViewComponent implements OnInit, OnDestroy {
 
 
     private createPost(title: string, text: string, username: string): void {
-        // const post = {
-        //     id: 0,
-        //     topicId: 0,
-        //     title: 'Frage zu Aufgabe 2',
-        //     text: 'Wieso sollen wir das machen?',
-        //     status: 'Open',
-        //     postTime: 'jetzt',
-        //     timeDifference: 'groß',
-        //     username: 'Jakob'
-        // };
-
         const post: Post = new Post();
         post.title = title;
         post.text = text;
         post.username = username;
         post.topicId = this.topic.id;
 
-        // post.id = 0;
-        // post.status = 'Open';
-        // post.postTime = 'jetzt';
-        // post.timeDifference = 'a lot';
-
-        console.log(post);
-
-        this._postService.createPost(post).subscribe(
-            // data => this.posts.push(data)
-        );
+        this._postService.createPost(post).subscribe();
 
         this.posts.push(post);
     }

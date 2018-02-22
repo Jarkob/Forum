@@ -47,7 +47,6 @@ export class TopicOverviewComponent implements OnInit {
     private getTopics() {
         this._topicService.getTopics().subscribe(
             data => {
-                console.log(data);
                 this.topics = data;
             }
         );
@@ -58,30 +57,13 @@ export class TopicOverviewComponent implements OnInit {
         const topic: Topic = new Topic();
         topic.title = title;
 
-        // this._topicService.createTopic(topic).subscribe(
-        //     data => {
-        //         this.topics.push(data);
-        //     }
-        // );
-
-        this._topicService.createTopic(topic).subscribe(
-            // (val) => {
-            //     console.log('POST call successful value returned in body', val);
-            // },
-            // response => {
-            //     console.log('POST call in error', response);
-            // },
-            // () => {
-            //     console.log('The POST observable is now completed.');
-            // }
-        );
+        this._topicService.createTopic(topic).subscribe();
 
         this.topics.push(topic);
     }
 
 
     private updateTopic(topicId: number, newTitle: string): void {
-        // this.topics.find()
         let topic: Topic = new Topic();
         this.topics.forEach(element => {
             if (element.id === topicId) {
@@ -91,9 +73,7 @@ export class TopicOverviewComponent implements OnInit {
 
         topic.title = newTitle;
 
-        this._topicService.updateTopic(topic).subscribe(
-            data => console.log('updated data: ' + data)
-        );
+        this._topicService.updateTopic(topic).subscribe();
     }
 
     private deleteTopic(id: number): void {
