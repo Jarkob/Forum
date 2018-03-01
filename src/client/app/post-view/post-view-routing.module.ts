@@ -8,6 +8,6 @@ import { PostViewComponent } from './post-view.component';
             {path: 'post-view/:id', component: PostViewComponent}
         ])
     ],
-    exports: [RouterModule] 
+    exports: [RouterModule]
 })
 export class PostViewRoutingModule { }

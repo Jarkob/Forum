@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PostViewRoutingModule } from './post-view-routing.module';
 import { PostViewComponent } from './post-view.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { PostViewComponent } from './post-view.component';
         MatIconModule,
         MatFormFieldModule,
         MatInputModule,
-        MatDialogModule
+        MatDialogModule,
+        FormsModule
     ],
     declarations: [PostViewComponent],
     exports: [PostViewComponent]

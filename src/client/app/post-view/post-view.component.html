@@ -34,7 +34,7 @@
                     </p>
                     <p *ngIf="editMode">
                         <mat-form-field>
-                            <textarea matInput [(value)]="comment.text" placeholder="Bearbeiten"></textarea>
+                            <textarea matInput [(ngModel)]="comment.text" placeholder="Bearbeiten"></textarea>
                         </mat-form-field>
                     </p>
                 </div>

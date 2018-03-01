@@ -172,6 +172,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
                 }
             });
 
+            console.log(comment);
+
             this._commentService.updateComment(comment).subscribe();
         } else {
             this.editMode = true;
