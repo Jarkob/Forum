@@ -1,21 +1,42 @@
 <h2>Themen</h2>
 <ul>
     <li *ngFor="let topic of topics">
-        <mat-card [routerLink]="['/topic-view', topic.id]">
-            {{topic.title}}
+        <mat-card *ngIf="!editTopic || editId != topic.id" [routerLink]="['/topic-view', topic.id]">
+            <span>{{topic.title}}</span>
+            <span class="right">
+                <button mat-fab color="accent" (click)="updateTopic(topic.id)">
+                    <mat-icon *ngIf="!editTopic || editId != topic.id">edit</mat-icon>
+                    <mat-icon *ngIf="editTopic && editId == topic.id">save</mat-icon>
+                </button>
+                <button mat-fab color="accent" (click)="deleteTopic(topic.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </span>
         </mat-card>
-        <button mat-fab color="accent" (click)="updateTopic(topic.id, 'Test update put')">
-            <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-fab color="accent" (click)="deleteTopic(topic.id)">
-            <mat-icon>delete</mat-icon>
-        </button>
+        <mat-card *ngIf="editTopic && editId == topic.id">
+            <span>
+                <mat-form-field>
+                    <input matInput maxlength="100" [(ngModel)]="topic.title" placeholder="Bearbeiten">
+                    <mat-hint align="end">{{topic.title.length}} / 100</mat-hint>
+                </mat-form-field>
+            </span>
+            <span class="right">
+                <button mat-fab color="accent" (click)="updateTopic(topic.id)">
+                    <mat-icon *ngIf="!editTopic || editId != topic.id">edit</mat-icon>
+                    <mat-icon *ngIf="editTopic && editId == topic.id">save</mat-icon>
+                </button>
+                <button mat-fab color="accent" (click)="deleteTopic(topic.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </span>
+        </mat-card>
     </li>
 </ul>
 
 <form>
     <mat-form-field>
-        <input matInput #newThema placeholder="Neues Thema">
+        <input matInput maxlength="100" required #newThema placeholder="Neues Thema">
+        <mat-hint align="end">{{newThema.value.length}} / 100</mat-hint>
     </mat-form-field>
     <button mat-fab color="accent" (click)="createTopic(newThema.value)">
         <mat-icon>add</mat-icon>

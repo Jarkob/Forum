@@ -18,7 +18,10 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private id: number;
     private sub: any;
 
-    private editMode = false;
+    private editPost = false;
+
+    private editComment = false;
+    private editId: number;
 
     private post: Post;
     private comments: Comment[] = [];
@@ -128,16 +131,18 @@ export class PostViewComponent implements OnInit, OnDestroy {
     }
 
 
-    private updatePost(text: string): void {
-        this.post.text = text;
-        this._postService.updatePost(this.post).subscribe();
+    private updatePost(): void {
+        if (this.editPost) {
+            this.editPost = false;
+            this._postService.updatePost(this.post).subscribe();
+        } else {
+            this.editPost = true;
+        }
     }
 
 
     private closePost(): void {
-        console.log(this.post);
         this.post.status = 'Closed';
-        console.log(this.post);
         this._postService.updatePost(this.post).subscribe();
     }
 
@@ -162,8 +167,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
 
     private updateComment(id: number): void {
-        if (this.editMode) {
-            this.editMode = false;
+        if (this.editComment) {
+            this.editComment = false;
+            this.editId = null;
 
             let comment: Comment = new Comment();
             this.comments.forEach(element => {
@@ -176,7 +182,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
             this._commentService.updateComment(comment).subscribe();
         } else {
-            this.editMode = true;
+            this.editComment = true;
+            this.editId = id;
         }
     }
 

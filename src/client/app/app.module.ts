@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { PostViewModule } from './post-view/post-view.module';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import 'hammerjs';
 
 
@@ -24,6 +25,7 @@ import { PostViewModule } from './post-view/post-view.module';
     TopicOverviewModule,
     TopicViewModule,
     PostViewModule,
+    BrowserAnimationsModule,
     SharedModule.forRoot()
   ],
   declarations: [AppComponent],

@@ -13,6 +13,9 @@ export class TopicOverviewComponent implements OnInit {
 
     private topics: Topic[] = [];
 
+    private editTopic = false;
+    private editId: number;
+
     constructor(private _topicService: TopicService) { }
 
     ngOnInit(): void {
@@ -63,17 +66,23 @@ export class TopicOverviewComponent implements OnInit {
     }
 
 
-    private updateTopic(topicId: number, newTitle: string): void {
-        let topic: Topic = new Topic();
-        this.topics.forEach(element => {
-            if (element.id === topicId) {
-                topic = element;
-            }
-        });
+    private updateTopic(topicId: number): void {
+        if (this.editTopic) {
+            this.editTopic = false;
+            this.editTopic = null;
 
-        topic.title = newTitle;
+            let topic: Topic = new Topic();
+            this.topics.forEach(element => {
+                if (element.id === topicId) {
+                    topic = element;
+                }
+            });
 
-        this._topicService.updateTopic(topic).subscribe();
+            this._topicService.updateTopic(topic).subscribe();
+        } else {
+            this.editTopic = true;
+            this.editId = topicId;
+        }
     }
 
     private deleteTopic(id: number): void {

@@ -3,6 +3,10 @@ ul {
     padding: 1em;
 }
 
+li {
+    margin: 15px;
+}
+
 mat-card {
     cursor: pointer;
 }
@@ -12,7 +16,7 @@ input {
 }
 
 mat-form-field {
-    width: 100%;
+    width: 75%;
 }
 
 form, h2 {
@@ -25,3 +29,10 @@ form, h2 {
     display: block;
     height: 100%;
 } */
+
+.right {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}

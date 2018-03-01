@@ -14,3 +14,47 @@ form, h2 {
 .wrapper, .post {
     padding: 1em;
 }
+
+.right {
+    display: block;
+    /* left: 0; */
+    position: absolute;
+    left: 0;
+    text-align: right;
+    /* top: 0; */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding-right: 25px;
+}
+
+/* .menuButton button {
+    margin-right: 15px;
+} */
+
+.comment {
+    padding: 15px;
+}
+
+.comment p {
+    margin-top: 40px;
+}
+
+.add-comment {
+    padding: 15px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 75%;
+}
+
+.right-buttons {
+    display: block;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}

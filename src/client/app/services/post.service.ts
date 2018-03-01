@@ -1,38 +1,38 @@
+import { GlobalsService } from './../shared/globals.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../classes/post';
 
-const restIP = '193.22.75.158';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
 export class PostService {
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private _globalsService: GlobalsService) {}
 
     public getPosts(topicId: number): Observable<Post[]> {
-        return this.http.get<Post[]>('http://' + restIP + ':50988/forum/posts/' + topicId);
+        return this.http.get<Post[]>(this._globalsService.restUrl + '/posts/' + topicId);
     }
 
 
     public getPost(id: number): Observable<Post> {
-        return this.http.get<Post>('http://' + restIP + ':50988/forum/post/' + id);
+        return this.http.get<Post>(this._globalsService.restUrl + '/post/' + id);
     }
 
 
     public createPost(post: Post): Observable<Post> {
-        return this.http.post<Post>('http://' + restIP + ':50988/forum/post', post, httpOptions);
+        return this.http.post<Post>(this._globalsService.restUrl + '/post', post, httpOptions);
     }
 
 
     public updatePost(post: Post): Observable<Post> {
-        return this.http.put<Post>('http://' + restIP + ':50988/forum/post', post);
+        return this.http.put<Post>(this._globalsService.restUrl + '/post', post);
     }
 
 
     public deletePost(id: number): Observable<{}> {
-        return this.http.delete('http://' + restIP + ':50988/forum/post/' + id);
+        return this.http.delete(this._globalsService.restUrl + '/post/' + id);
     }
 }

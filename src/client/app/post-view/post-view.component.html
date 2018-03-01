@@ -1,52 +1,87 @@
 <ul>
     <li>
-        <mat-card>
+        <mat-card *ngIf="this.post">
             <h3>{{this.post.title}}</h3>
-            <i>von {{this.post.username}} am {{this.post.postTime}}</i>
-            <button mat-fab color="accent" (click)="updatePost('Test für upgedateten Post')">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-fab color="accent" (click)="closePost()">
-                <mat-icon *ngIf="post.status === 'Closed'">lock</mat-icon>
-                <mat-icon *ngIf="post.status === 'Open'">lock_open</mat-icon>
-            </button>
-            <button mat-fab color="accent" (click)="deletePost()">
-                <mat-icon>delete</mat-icon>
-            </button>
-            <p>{{this.post.text}}</p>
+            <i>von {{this.post.username}} vor {{this.post.timeDifference}}</i>
+            
+            <span class="right-buttons">
+                <button *ngIf="this.post.status === 'Open'" mat-fab color="accent" (click)="updatePost()">
+                    <mat-icon *ngIf="!editPost">edit</mat-icon>
+                    <mat-icon *ngIf="editPost">save</mat-icon>
+                </button>
+                <button *ngIf="this.post.status === 'Closed'" disabled mat-fab color="accent" (click)="updatePost()">
+                    <mat-icon *ngIf="!editPost">edit</mat-icon>
+                    <mat-icon *ngIf="editPost">save</mat-icon>
+                </button>
+
+                <button *ngIf="this.post.status === 'Open'" mat-fab color="accent" (click)="closePost()">
+                    <mat-icon *ngIf="post.status === 'Closed'">lock</mat-icon>
+                    <mat-icon *ngIf="post.status === 'Open'">lock_open</mat-icon>
+                </button>
+                <button *ngIf="this.post.status === 'Closed'" disabled mat-fab color="accent" (click)="closePost()">
+                    <mat-icon *ngIf="post.status === 'Closed'">lock</mat-icon>
+                    <mat-icon *ngIf="post.status === 'Open'">lock_open</mat-icon>
+                </button>
+
+                <button mat-fab color="accent" (click)="deletePost()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </span>
+
+            <p *ngIf="!editPost">{{this.post.text}}</p>
+            <p *ngIf="editPost">
+                <mat-form-field class="half-width">
+                    <textarea matInput matTextareaAutosize maxlength="5000" [(ngModel)]="this.post.text" placeholder="Bearbeiten"></textarea>
+                    <mat-hint align="end">{{this.post.text.length}} / 5000</mat-hint>
+                </mat-form-field>
+            </p>
         </mat-card>
 
-        <ul>
+        <ul *ngIf="this.post">
             <li *ngFor="let comment of comments">
-                <div>
+                <div class="comment">
                     <p>
-                        <i>von {{comment.username}} am {{comment.commentTime}}</i>
-                        <button mat-fab color="accent" (click)="updateComment(comment.id)">
-                            <mat-icon *ngIf="!editMode">edit</mat-icon>
-                            <mat-icon *ngIf="editMode">save</mat-icon>
-                        </button>
-                        <button mat-fab color="accent" (click)="deleteComment(comment.id)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        <span class="right">
+                            <button *ngIf="this.post.status === 'Open'" mat-fab color="accent" (click)="updateComment(comment.id)">
+                                <mat-icon *ngIf="!editComment || editId != comment.id">edit</mat-icon>
+                                <mat-icon *ngIf="editComment && editId == comment.id">save</mat-icon>
+                            </button>
+                            <button *ngIf="this.post.status === 'Closed'" disabled mat-fab color="accent" (click)="updateComment(comment.id)">
+                                <mat-icon *ngIf="!editComment || editId != comment.id">edit</mat-icon>
+                                <mat-icon *ngIf="editComment && editId == comment.id">save</mat-icon>
+                            </button>
+
+                            <button *ngIf="this.post.status === 'Open'" mat-fab color="accent" (click)="deleteComment(comment.id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <button *ngIf="this.post.status === 'Closed'" mat-fab disabled color="accent" (click)="deleteComment(comment.id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </span>
+
+                        <i>von {{comment.username}} vor {{comment.timeDifference}}</i>
                     </p>
-                    <p *ngIf="!editMode">
+                    <p *ngIf="!editComment || editId != comment.id">
                         {{comment.text}}
                     </p>
-                    <p *ngIf="editMode">
-                        <mat-form-field>
-                            <textarea matInput [(ngModel)]="comment.text" placeholder="Bearbeiten"></textarea>
+                    <p *ngIf="editComment && editId == comment.id">
+                        <mat-form-field class="full-width">
+                            <textarea matTextareaAutosize maxlength="2000" matInput [(ngModel)]="comment.text" placeholder="Bearbeiten"></textarea>
+                            <mat-hint align="end">{{comment.text.length}} / 2000</mat-hint>
                         </mat-form-field>
                     </p>
                 </div>
                 <mat-divider></mat-divider>
             </li>
-            <li>
-                <div>
+            <li *ngIf="this.post.status === 'Open'">
+                <div class="add-comment">
                     <mat-form-field>
-                        <input matInput #newUser placeholder="Name">
+                        <input matInput maxlength="20" required #newUser placeholder="Name">
+                        <mat-hint align="end">{{newUser.value.length}} / 20</mat-hint>
                     </mat-form-field>
-                    <mat-form-field>
-                        <textarea matInput #newComment placeholder="Kommentar"></textarea>
+                    <mat-form-field class="half-width">
+                        <textarea matInput maxlength="2000" matTextareaAutosize required #newComment placeholder="Kommentar"></textarea>
+                        <mat-hint align="end">{{newComment.value.length}} / 2000</mat-hint>
                     </mat-form-field>
                     <button mat-fab color="accent" (click)="createComment(newUser.value, newComment.value)">
                         <mat-icon>add</mat-icon>

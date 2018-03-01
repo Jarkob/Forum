@@ -5,7 +5,8 @@ import {
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
  } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
         MatFormFieldModule,
         MatInputModule,
         MatDialogModule,
-        FormsModule
+        FormsModule,
+        MatMenuModule
     ],
     declarations: [PostViewComponent],
     exports: [PostViewComponent]

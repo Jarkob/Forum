@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TopicViewRoutingModule } from './topic-view-routing.module';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,8 @@ import { MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, Mat
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        FormsModule
     ],
     declarations: [TopicViewComponent],
     exports: [TopicViewComponent]
