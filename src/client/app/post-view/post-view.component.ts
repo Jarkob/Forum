@@ -120,6 +120,10 @@ export class PostViewComponent implements OnInit, OnDestroy {
             this._postService.getPost(this.id).subscribe(
                 data => {
                     this.post = data;
+
+                    // debug
+                    console.log(this.post);
+
                     this._commentService.getComments(this.post.id).subscribe(
                         data => {
                             this.comments = data;
