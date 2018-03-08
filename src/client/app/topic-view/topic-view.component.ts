@@ -26,18 +26,10 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(params => {
             this.id = +params['id'];
 
-            this._topicService.getTopic(this.id).subscribe(
-                data => {
-                    this.topic = data;
-                }
-            );
-
-            this._postService.getPosts(this.id).subscribe(
-                data => {
-                    this.posts = data;
-                }
-            );
+            this.getTopic();
         });
+
+        this.getPosts();
 
         // without backend mock data
         // this.topic = {
@@ -74,6 +66,24 @@ export class TopicViewComponent implements OnInit, OnDestroy {
     }
 
 
+    getTopic() {
+        this._topicService.getTopic(this.id).subscribe(
+            data => {
+                this.topic = data;
+            }
+        );
+    }
+
+
+    getPosts() {
+        this._postService.getPosts(this.id).subscribe(
+            data => {
+                this.posts = data;
+            }
+        );
+    }
+
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
@@ -86,8 +96,13 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         post.username = username;
         post.topicId = this.topic.id;
 
-        this._postService.createPost(post).subscribe();
+        this._postService.createPost(post).subscribe(
+            data => {
+                this.getPosts();
+            }
+        );
 
-        this.posts.push(post);
+        // this.posts.push(post);
+        // this.getPosts();
     }
 }

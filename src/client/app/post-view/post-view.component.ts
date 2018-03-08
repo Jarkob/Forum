@@ -120,18 +120,19 @@ export class PostViewComponent implements OnInit, OnDestroy {
             this._postService.getPost(this.id).subscribe(
                 data => {
                     this.post = data;
-
-                    // debug
-                    console.log(this.post);
-
-                    this._commentService.getComments(this.post.id).subscribe(
-                        data => {
-                            this.comments = data;
-                        }
-                    );
+                    this.getComments();
                 }
             );
         });
+    }
+
+
+    private getComments() {
+        this._commentService.getComments(this.post.id).subscribe(
+            data => {
+                this.comments = data;
+            }
+        );
     }
 
 
@@ -164,9 +165,11 @@ export class PostViewComponent implements OnInit, OnDestroy {
         comment.text = text;
         comment.username = username;
 
-        this._commentService.createComment(comment).subscribe();
-
-        this.comments.push(comment);
+        this._commentService.createComment(comment).subscribe(
+            data => {
+                this.getComments();
+            }
+        );
     }
 
 
@@ -182,7 +185,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
                 }
             });
 
-            console.log(comment);
+            // console.log(comment);
 
             this._commentService.updateComment(comment).subscribe();
         } else {
@@ -195,6 +198,6 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private deleteComment(id: number): void {
         this._commentService.deleteComment(id).subscribe();
 
-        this.getPost();
+        this.getComments();
     }
 }

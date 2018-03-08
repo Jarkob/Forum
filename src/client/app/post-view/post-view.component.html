@@ -83,7 +83,7 @@
                         <textarea matInput maxlength="2000" matTextareaAutosize required #newComment placeholder="Kommentar"></textarea>
                         <mat-hint align="end">{{newComment.value.length}} / 2000</mat-hint>
                     </mat-form-field>
-                    <button mat-fab color="accent" (click)="createComment(newUser.value, newComment.value)">
+                    <button mat-fab color="accent" (click)="createComment(newUser.value, newComment.value); newUser.value = null; newComment.value = null">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>

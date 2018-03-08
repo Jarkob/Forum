@@ -60,16 +60,18 @@ export class TopicOverviewComponent implements OnInit {
         const topic: Topic = new Topic();
         topic.title = title;
 
-        this._topicService.createTopic(topic).subscribe();
-
-        this.topics.push(topic);
+        this._topicService.createTopic(topic).subscribe(
+            data => {
+                this.getTopics();
+            }
+        );
     }
 
 
     private updateTopic(topicId: number): void {
         if (this.editTopic) {
             this.editTopic = false;
-            this.editTopic = null;
+            this.editId = null;
 
             let topic: Topic = new Topic();
             this.topics.forEach(element => {
@@ -86,8 +88,13 @@ export class TopicOverviewComponent implements OnInit {
     }
 
     private deleteTopic(id: number): void {
-        this._topicService.deleteTopic(id).subscribe();
+        this.editId = id;
+        this.editTopic = true;
 
-        this.getTopics();
+        this._topicService.deleteTopic(id).subscribe(
+            data => {
+                this.getTopics();
+            }
+        );
     }
 }

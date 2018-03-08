@@ -13,6 +13,7 @@
                 </button>
             </span>
         </mat-card>
+        
         <mat-card *ngIf="editTopic && editId == topic.id">
             <span>
                 <mat-form-field>
@@ -38,7 +39,7 @@
         <input matInput maxlength="100" required #newThema placeholder="Neues Thema">
         <mat-hint align="end">{{newThema.value.length}} / 100</mat-hint>
     </mat-form-field>
-    <button mat-fab color="accent" (click)="createTopic(newThema.value)">
+    <button mat-fab color="accent" (click)="createTopic(newThema.value); newThema.value = null">
         <mat-icon>add</mat-icon>
     </button>
 </form>

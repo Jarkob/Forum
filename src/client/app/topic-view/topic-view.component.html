@@ -40,7 +40,7 @@
         </mat-form-field>
     </div>
 
-    <button mat-fab color="accent" (click)="createPost(newTitle.value, newText.value, newUser.value)">
+    <button mat-fab color="accent" (click)="createPost(newTitle.value, newText.value, newUser.value); newTitle.value = null; newText.value = null; newUser.value = null">
         <mat-icon>add</mat-icon>
     </button>
 </form>
