@@ -58,7 +58,11 @@ export class TopicOverviewComponent implements OnInit {
 
     private createTopic(title: string): void {
         const topic: Topic = new Topic();
+        topic.id = null;
         topic.title = title;
+
+        // debug
+        console.log(topic);
 
         this._topicService.createTopic(topic).subscribe(
             data => {
