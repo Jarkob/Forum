@@ -14,36 +14,12 @@ export class TopicOverviewComponent implements OnInit {
     private topics: Topic[] = [];
 
     private editTopic = false;
-    private editId: number;
+    private editId: string;
 
     constructor(private _topicService: TopicService) { }
 
     ngOnInit(): void {
         this.getTopics();
-
-        // without backend mock data
-        // this.topics = [
-        //     {
-        //         id: 1,
-        //         title: 'Hausaufgaben'
-        //     },
-        //     {
-        //         id: 2,
-        //         title: 'Klausuren'
-        //     },
-        //     {
-        //         id: 3,
-        //         title: 'Fahrgemeinschaften'
-        //     },
-        //     {
-        //         id: 4,
-        //         title: 'Klatsch und Tratsch'
-        //     },
-        //     {
-        //         id: 5,
-        //         title: 'Sport'
-        //     }
-        // ];
     }
 
 
@@ -51,6 +27,7 @@ export class TopicOverviewComponent implements OnInit {
         this._topicService.getTopics().subscribe(
             data => {
                 this.topics = data;
+                console.log(this.topics);
             }
         );
     }
@@ -58,11 +35,8 @@ export class TopicOverviewComponent implements OnInit {
 
     private createTopic(title: string): void {
         const topic: Topic = new Topic();
-        topic.id = 1;
+        topic._id = null;
         topic.title = title;
-
-        // debug
-        console.log(topic);
 
         this._topicService.createTopic(topic).subscribe(
             data => {
@@ -72,14 +46,14 @@ export class TopicOverviewComponent implements OnInit {
     }
 
 
-    private updateTopic(topicId: number): void {
+    private updateTopic(topicId: string): void {
         if (this.editTopic) {
             this.editTopic = false;
             this.editId = null;
 
             let topic: Topic = new Topic();
             this.topics.forEach(element => {
-                if (element.id === topicId) {
+                if (element._id === topicId) {
                     topic = element;
                 }
             });
@@ -91,7 +65,7 @@ export class TopicOverviewComponent implements OnInit {
         }
     }
 
-    private deleteTopic(id: number): void {
+    private deleteTopic(id: string): void {
         this.editId = id;
         this.editTopic = true;
 

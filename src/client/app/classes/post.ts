@@ -1,8 +1,8 @@
 
 export class Post {
 
-    id: String;
-    topicId: String;
+    _id: string;
+    topicId: string;
     title: string;
     text: string;
     status: string;

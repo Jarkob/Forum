@@ -12,7 +12,7 @@ const httpOptions = {
 export class CommentService {
     constructor(private http: HttpClient, private _globalsService: GlobalsService) {}
 
-    public getComments(postId: number): Observable<Comment[]> {
+    public getComments(postId: string): Observable<Comment[]> {
         return this.http.get<Comment[]>(this._globalsService.restUrl + '/comments/' + postId);
     }
 
@@ -23,11 +23,11 @@ export class CommentService {
 
 
     public updateComment(comment: Comment): Observable<Comment> {
-        return this.http.put<Comment>(this._globalsService.restUrl + '/comments' + comment.id, comment);
+        return this.http.put<Comment>(this._globalsService.restUrl + '/comments/' + comment._id, comment);
     }
 
 
-    public deleteComment(id: number): Observable<{}> {
+    public deleteComment(id: string): Observable<{}> {
         return this.http.delete(this._globalsService.restUrl + '/comments/' + id);
     }
 }

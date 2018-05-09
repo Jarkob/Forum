@@ -12,12 +12,12 @@ const httpOptions = {
 export class PostService {
     constructor(private http: HttpClient, private _globalsService: GlobalsService) {}
 
-    public getPosts(topicId: number): Observable<Post[]> {
+    public getPosts(topicId: string): Observable<Post[]> {
         return this.http.get<Post[]>(this._globalsService.restUrl + '/posts/' + topicId);
     }
 
 
-    public getPost(id: number): Observable<Post> {
+    public getPost(id: string): Observable<Post> {
         return this.http.get<Post>(this._globalsService.restUrl + '/post/' + id);
     }
 
@@ -28,11 +28,11 @@ export class PostService {
 
 
     public updatePost(post: Post): Observable<Post> {
-        return this.http.put<Post>(this._globalsService.restUrl + '/posts/' + post.id, post);
+        return this.http.put<Post>(this._globalsService.restUrl + '/posts/' + post._id, post);
     }
 
 
-    public deletePost(id: number): Observable<{}> {
+    public deletePost(id: string): Observable<{}> {
         return this.http.delete(this._globalsService.restUrl + '/posts/' + id);
     }
 }

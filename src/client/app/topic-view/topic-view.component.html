@@ -2,7 +2,7 @@
 
 <ul>
     <li *ngFor="let post of posts">
-        <mat-card [routerLink]="['/post-view', post.id]">
+        <mat-card [routerLink]="['/post-view', post._id]">
             <div>
                 {{post.title}} von {{post.username}} vor {{post.timeDifference}}
             </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 /**
  * This class represents the navigation bar component.
@@ -9,4 +10,12 @@ import { Component } from '@angular/core';
   templateUrl: 'navbar.component.html',
   styleUrls: ['navbar.component.css'],
 })
-export class NavbarComponent { }
+export class NavbarComponent {
+
+    constructor(private location: Location) { }
+
+    public navigateBack() {
+      this.location.back();
+    }
+}
+

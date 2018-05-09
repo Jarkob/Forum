@@ -15,13 +15,13 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 })
 export class PostViewComponent implements OnInit, OnDestroy {
 
-    private id: number;
+    private id: string;
     private sub: any;
 
     private editPost = false;
 
     private editComment = false;
-    private editId: number;
+    private editId: string;
 
     private post: Post;
     private comments: Comment[] = [];
@@ -115,7 +115,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
     private getPost() {
         this.sub = this.route.params.subscribe(params => {
-            this.id = +params['id'];
+            this.id = params['id'];
 
             this._postService.getPost(this.id).subscribe(
                 data => {
@@ -128,7 +128,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
 
     private getComments() {
-        this._commentService.getComments(this.post.id).subscribe(
+        this._commentService.getComments(this.post._id).subscribe(
             data => {
                 this.comments = data;
             }
@@ -153,7 +153,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
 
     private deletePost() {
-        this._postService.deletePost(this.post.id).subscribe();
+        this._postService.deletePost(this.post._id).subscribe();
 
         this.router.navigate(['/']);
     }
@@ -161,7 +161,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
     private createComment(username: string, text: string): void {
         const comment: Comment = new Comment();
-        comment.postId = this.post.id;
+        comment.postId = this.post._id;
         comment.text = text;
         comment.username = username;
 
@@ -173,14 +173,14 @@ export class PostViewComponent implements OnInit, OnDestroy {
     }
 
 
-    private updateComment(id: number): void {
+    private updateComment(id: string): void {
         if (this.editComment) {
             this.editComment = false;
             this.editId = null;
 
             let comment: Comment = new Comment();
             this.comments.forEach(element => {
-                if (element.id === id) {
+                if (element._id === id) {
                     comment = element;
                 }
             });
@@ -195,7 +195,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
     }
 
 
-    private deleteComment(id: number): void {
+    private deleteComment(id: string): void {
         this._commentService.deleteComment(id).subscribe();
 
         this.getComments();

@@ -16,7 +16,7 @@ export class TopicService {
         return this.http.get<Topic[]>(this._globalsService.restUrl + '/topics');
     }
 
-    public getTopic(id: number): Observable<Topic> {
+    public getTopic(id: string): Observable<Topic> {
         return this.http.get<Topic>(this._globalsService.restUrl + '/topic/' + id);
     }
 
@@ -27,11 +27,11 @@ export class TopicService {
 
 
     public updateTopic(topic: Topic): Observable<Topic> {
-        return this.http.put<Topic>(this._globalsService.restUrl + '/topics/' + topic.id, topic);
+        return this.http.put<Topic>(this._globalsService.restUrl + '/topics/' + topic._id, topic);
     }
 
 
-    public deleteTopic(id: number): Observable<{}> {
+    public deleteTopic(id: string): Observable<{}> {
         return this.http.delete(this._globalsService.restUrl + '/topics/' + id);
     }
 }

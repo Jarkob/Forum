@@ -1,6 +1,6 @@
 
 export class Topic {
 
-    id: String;
+    _id: string;
     title: string;
 }
