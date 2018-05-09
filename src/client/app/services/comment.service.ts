@@ -13,21 +13,21 @@ export class CommentService {
     constructor(private http: HttpClient, private _globalsService: GlobalsService) {}
 
     public getComments(postId: number): Observable<Comment[]> {
-        return this.http.get<Comment[]>(this._globalsService.restUrl + '/comment/' + postId);
+        return this.http.get<Comment[]>(this._globalsService.restUrl + '/comments/' + postId);
     }
 
 
     public createComment(comment: Comment): Observable<Comment> {
-        return this.http.post<Comment>(this._globalsService.restUrl + '/comment', comment, httpOptions);
+        return this.http.post<Comment>(this._globalsService.restUrl + '/comments', comment, httpOptions);
     }
 
 
     public updateComment(comment: Comment): Observable<Comment> {
-        return this.http.put<Comment>(this._globalsService.restUrl + '/comment', comment);
+        return this.http.put<Comment>(this._globalsService.restUrl + '/comments' + comment.id, comment);
     }
 
 
     public deleteComment(id: number): Observable<{}> {
-        return this.http.delete(this._globalsService.restUrl + '/comment/' + id);
+        return this.http.delete(this._globalsService.restUrl + '/comments/' + id);
     }
 }

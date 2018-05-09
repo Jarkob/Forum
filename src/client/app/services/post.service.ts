@@ -23,16 +23,16 @@ export class PostService {
 
 
     public createPost(post: Post): Observable<Post> {
-        return this.http.post<Post>(this._globalsService.restUrl + '/post', post, httpOptions);
+        return this.http.post<Post>(this._globalsService.restUrl + '/posts', post, httpOptions);
     }
 
 
     public updatePost(post: Post): Observable<Post> {
-        return this.http.put<Post>(this._globalsService.restUrl + '/post', post);
+        return this.http.put<Post>(this._globalsService.restUrl + '/posts/' + post.id, post);
     }
 
 
     public deletePost(id: number): Observable<{}> {
-        return this.http.delete(this._globalsService.restUrl + '/post/' + id);
+        return this.http.delete(this._globalsService.restUrl + '/posts/' + id);
     }
 }

@@ -13,25 +13,25 @@ export class TopicService {
     constructor(private http: HttpClient, private _globalsService: GlobalsService) {}
 
     public getTopics(): Observable<Topic[]> {
-        return this.http.get<Topic[]>(this._globalsService.restUrl + '/topic');
+        return this.http.get<Topic[]>(this._globalsService.restUrl + '/topics');
     }
 
     public getTopic(id: number): Observable<Topic> {
-        return this.http.get<Topic>(this._globalsService.restUrl + '/topic/' + id);
+        return this.http.get<Topic>(this._globalsService.restUrl + '/topics/' + id);
     }
 
 
     public createTopic(topic: Topic): Observable<Topic> {
-        return this.http.post<Topic>(this._globalsService.restUrl + '/topic', topic, httpOptions);
+        return this.http.post<Topic>(this._globalsService.restUrl + '/topics', topic, httpOptions);
     }
 
 
     public updateTopic(topic: Topic): Observable<Topic> {
-        return this.http.put<Topic>(this._globalsService.restUrl + '/topic/' + topic.id, topic);
+        return this.http.put<Topic>(this._globalsService.restUrl + '/topics/' + topic.id, topic);
     }
 
 
     public deleteTopic(id: number): Observable<{}> {
-        return this.http.delete(this._globalsService.restUrl + '/topic/' + id);
+        return this.http.delete(this._globalsService.restUrl + '/topics/' + id);
     }
 }
