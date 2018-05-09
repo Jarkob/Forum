@@ -1,6 +1,6 @@
 
 export class Topic {
 
-    id: number;
+    id: String;
     title: string;
 }

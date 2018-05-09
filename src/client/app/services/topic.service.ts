@@ -17,7 +17,7 @@ export class TopicService {
     }
 
     public getTopic(id: number): Observable<Topic> {
-        return this.http.get<Topic>(this._globalsService.restUrl + '/topics/' + id);
+        return this.http.get<Topic>(this._globalsService.restUrl + '/topic/' + id);
     }
 
 
