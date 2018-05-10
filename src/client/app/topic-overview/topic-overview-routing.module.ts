@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { TopicOverviewComponent } from './topic-overview.component';
 
 @NgModule({

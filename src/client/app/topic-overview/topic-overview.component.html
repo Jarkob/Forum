@@ -2,7 +2,7 @@
 <ul>
     <li *ngFor="let topic of topics">
         <mat-card *ngIf="!editTopic || editId != topic._id" [routerLink]="['/topic-view', topic._id]">
-            <span>{{topic.title}}</span>
+            <span>{{ topic.title }}</span>
             <span class="right">
                 <button mat-fab color="accent" (click)="updateTopic(topic._id)">
                     <mat-icon *ngIf="!editTopic || editId != topic._id">edit</mat-icon>
@@ -18,7 +18,7 @@
             <span>
                 <mat-form-field>
                     <input matInput maxlength="100" [(ngModel)]="topic.title" placeholder="Bearbeiten">
-                    <mat-hint align="end">{{topic.title.length}} / 100</mat-hint>
+                    <mat-hint align="end">{{ topic.title.length }} / 100</mat-hint>
                 </mat-form-field>
             </span>
             <span class="right">
@@ -37,7 +37,7 @@
 <form>
     <mat-form-field>
         <input matInput maxlength="100" required #newThema placeholder="Neues Thema">
-        <mat-hint align="end">{{newThema.value.length}} / 100</mat-hint>
+        <mat-hint align="end">{{ newThema.value.length }} / 100</mat-hint>
     </mat-form-field>
     <button mat-fab color="accent" (click)="createTopic(newThema.value); newThema.value = null">
         <mat-icon>add</mat-icon>

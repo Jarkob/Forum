@@ -1,8 +1,8 @@
 <ul>
     <li>
         <mat-card *ngIf="this.post">
-            <h3>{{this.post.title}}</h3>
-            <i>von {{this.post.username}} vor {{this.post.timeDifference}}</i>
+            <h3>{{ this.post.title }}</h3>
+            <i>von {{ this.post.username }} vor {{ this.post.timeDifference }}</i>
             
             <span class="right-buttons">
                 <button *ngIf="this.post.status === 'open'" mat-fab color="accent" (click)="updatePost()">
@@ -28,11 +28,11 @@
                 </button>
             </span>
 
-            <p *ngIf="!editPost">{{this.post.text}}</p>
+            <p *ngIf="!editPost">{{ this.post.text }}</p>
             <p *ngIf="editPost">
                 <mat-form-field class="half-width">
                     <textarea matInput matTextareaAutosize maxlength="5000" [(ngModel)]="this.post.text" placeholder="Bearbeiten"></textarea>
-                    <mat-hint align="end">{{this.post.text.length}} / 5000</mat-hint>
+                    <mat-hint align="end">{{ this.post.text.length }} / 5000</mat-hint>
                 </mat-form-field>
             </p>
         </mat-card>
@@ -59,15 +59,15 @@
                             </button>
                         </span>
 
-                        <i>von {{comment.username}} vor {{comment.timeDifference}}</i>
+                        <i>von {{ comment.username }} vor {{ comment.timeDifference }}</i>
                     </p>
                     <p *ngIf="!editComment || editId != comment._id">
-                        {{comment.text}}
+                        {{ comment.text }}
                     </p>
                     <p *ngIf="editComment && editId == comment._id">
                         <mat-form-field class="full-width">
                             <textarea matTextareaAutosize maxlength="2000" matInput [(ngModel)]="comment.text" placeholder="Bearbeiten"></textarea>
-                            <mat-hint align="end">{{comment.text.length}} / 2000</mat-hint>
+                            <mat-hint align="end">{{ comment.text.length }} / 2000</mat-hint>
                         </mat-form-field>
                     </p>
                 </div>
@@ -77,11 +77,11 @@
                 <div class="add-comment">
                     <mat-form-field>
                         <input matInput maxlength="20" required #newUser placeholder="Name">
-                        <mat-hint align="end">{{newUser.value.length}} / 20</mat-hint>
+                        <mat-hint align="end">{{ newUser.value.length }} / 20</mat-hint>
                     </mat-form-field>
                     <mat-form-field class="half-width">
                         <textarea matInput maxlength="2000" matTextareaAutosize required #newComment placeholder="Kommentar"></textarea>
-                        <mat-hint align="end">{{newComment.value.length}} / 2000</mat-hint>
+                        <mat-hint align="end">{{ newComment.value.length }} / 2000</mat-hint>
                     </mat-form-field>
                     <button mat-fab color="accent" (click)="createComment(newUser.value, newComment.value); newUser.value = null; newComment.value = null">
                         <mat-icon>add</mat-icon>

@@ -29,46 +29,12 @@ export class TopicViewComponent implements OnInit, OnDestroy {
             this.getTopic();
             this.getPosts();
         });
-
-        // without backend mock data
-        // this.topic = {
-        //     id: 1,
-        //     title: 'Hausaufgaben'
-        // };
-
-        // this.posts = [
-        //     {
-        //         id: 1,
-        //         title: 'Verzweiflung',
-        //         text: 'Ich weiß nicht mehr weiter, ich bin so verzweifelt.',
-        //         status: 'open',
-        //         postTime: '11.11.2011',
-        //         username: 'Max Mustermann'
-        //     },
-        //     {
-        //         id: 2,
-        //         title: 'Noch nicht viel los hier',
-        //         text: 'Ist ja noch nicht viel los hier ihr Affen, macht mal Kapelle!',
-        //         status: 'open',
-        //         postTime: '22.22.2022',
-        //         username: 'Must Maxermann'
-        //     },
-        //     {
-        //         id: 3,
-        //         title: 'Frage zu Aufgabe 3',
-        //         text: 'Wieso sollen wir Aufgabe 3 machen?',
-        //         status: 'open',
-        //         postTime: '31.03.2009',
-        //         username: 'Diogenes'
-        //     }
-        // ];
     }
 
 
     getTopic() {
         this._topicService.getTopic(this.id).subscribe(
             data => {
-                console.log('debug: ', data);
                 this.topic = data;
             }
         );
@@ -95,8 +61,6 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         post.text = text;
         post.username = username;
         post.topicId = this.topic._id;
-
-        console.log('debug: ', post);
 
         this._postService.createPost(post).subscribe(
             data => {

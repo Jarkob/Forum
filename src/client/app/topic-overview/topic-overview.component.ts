@@ -27,7 +27,6 @@ export class TopicOverviewComponent implements OnInit {
         this._topicService.getTopics().subscribe(
             data => {
                 this.topics = data;
-                console.log(this.topics);
             }
         );
     }

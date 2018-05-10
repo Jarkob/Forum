@@ -1,19 +1,11 @@
-<h2>{{this.topic?.title}}</h2>
+<h2>{{ this.topic?.title }}</h2>
 
 <ul>
     <li *ngFor="let post of posts">
         <mat-card [routerLink]="['/post-view', post._id]">
             <div>
-                {{post.title}} von {{post.username}} vor {{post.timeDifference}}
+                {{ post.title }} von {{ post.username }} vor {{ post.timeDifference }}
             </div>
-            <!-- <div>
-                <button mat-fab color="accent">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-fab color="accent">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div> -->
         </mat-card>
     </li>
 </ul>
@@ -22,21 +14,21 @@
     <div>
         <mat-form-field>
             <input matInput maxlength="100" required #newTitle placeholder="Titel">
-            <mat-hint align="end">{{newTitle.value.length}} / 100</mat-hint>
+            <mat-hint align="end">{{ newTitle.value.length }} / 100</mat-hint>
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field>
             <textarea matInput matTextareaAutosize maxlength="5000" required #newText placeholder="Inhalt"></textarea>
-            <mat-hint align="end">{{newText.value.length}} / 5000</mat-hint>
+            <mat-hint align="end">{{ newText.value.length }} / 5000</mat-hint>
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field>
             <input matInput maxlength="20" required #newUser placeholder="Name">
-            <mat-hint align="end">{{newUser.value.length}} / 20</mat-hint>
+            <mat-hint align="end">{{ newUser.value.length }} / 20</mat-hint>
         </mat-form-field>
     </div>
 
