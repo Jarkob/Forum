@@ -61,6 +61,7 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         post.text = text;
         post.username = username;
         post.topicId = this.topic._id;
+        post.status = 'open';
 
         this._postService.createPost(post).subscribe(
             data => {
