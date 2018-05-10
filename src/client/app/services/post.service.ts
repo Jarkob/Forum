@@ -23,6 +23,10 @@ export class PostService {
 
 
     public createPost(post: Post): Observable<Post> {
+        // set time
+        if (!post.postTime) {
+            post.postTime = new Date();
+        }
         return this.http.post<Post>(this._globalsService.restUrl + '/posts', post, httpOptions);
     }
 

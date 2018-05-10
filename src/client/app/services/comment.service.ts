@@ -18,6 +18,10 @@ export class CommentService {
 
 
     public createComment(comment: Comment): Observable<Comment> {
+        // set time
+        if (!comment.commentTime) {
+            comment.commentTime = new Date();
+        }
         return this.http.post<Comment>(this._globalsService.restUrl + '/comments', comment, httpOptions);
     }
 

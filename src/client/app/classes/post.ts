@@ -6,7 +6,7 @@ export class Post {
     title: string;
     text: string;
     status: string;
-    postTime: string;
+    postTime: Date;
     timeDifference: string;
     username: string;
 }
