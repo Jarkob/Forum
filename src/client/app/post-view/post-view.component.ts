@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Comment } from './../classes/comment';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Post } from '../classes/post';
@@ -147,7 +146,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
 
 
     private closePost(): void {
-        this.post.status = 'Closed';
+        this.post.status = 'closed';
         this._postService.updatePost(this.post).subscribe();
     }
 
