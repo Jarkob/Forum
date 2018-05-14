@@ -1,5 +1,23 @@
-<button mat-icon-button (click)="navigateBack()">
-    <mat-icon>arrow_back_ios</mat-icon>
-</button>
-<h1 [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Forum</h1>
-<div class="more"></div>
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="navigateBack()">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+
+    <span [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Forum</span>
+
+    <!-- <span [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Topics</span> -->
+
+    <span [routerLink]="['/login']">Login</span>
+    <span [routerLink]="['/register']">Register</span>
+
+    <button class="more" mat-icon-button [matMenuTriggerFor]="menu">
+        <!-- <mat-icon>more_vert</mat-icon> -->
+        <mat-icon>menu</mat-icon>
+        <!-- <mat-icon>settings</mat-icon> -->
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item>
+            Impressum
+        </button>
+    </mat-menu>
+</mat-toolbar>

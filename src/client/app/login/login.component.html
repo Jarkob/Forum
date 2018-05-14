@@ -1,0 +1,15 @@
+<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <mat-form-field>
+            <input matInput type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Username">
+        </mat-form-field>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <mat-form-field>
+            <input matInput type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required placeholder="Password">
+        </mat-form-field>
+    </div>
+    <button mat-button color="accent" [disabled]="loading">Login</button>
+    <mat-spinner *ngIf="loading" [diameter]="50"></mat-spinner>
+</form>
+<button mat-button color="accent" [disabled]="loading" [routerLink]="['/register']">Register</button>

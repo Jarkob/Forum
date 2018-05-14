@@ -10,28 +10,28 @@ const httpOptions = {
 
 @Injectable()
 export class TopicService {
-    constructor(private http: HttpClient, private _globalsService: GlobalsService) {}
+    constructor(private http: HttpClient, private globalsService: GlobalsService) {}
 
     public getTopics(): Observable<Topic[]> {
-        return this.http.get<Topic[]>(this._globalsService.restUrl + '/topics');
+        return this.http.get<Topic[]>(this.globalsService.restUrl + '/topics');
     }
 
     public getTopic(id: string): Observable<Topic> {
-        return this.http.get<Topic>(this._globalsService.restUrl + '/topic/' + id);
+        return this.http.get<Topic>(this.globalsService.restUrl + '/topic/' + id);
     }
 
 
     public createTopic(topic: Topic): Observable<Topic> {
-        return this.http.post<Topic>(this._globalsService.restUrl + '/topics', topic, httpOptions);
+        return this.http.post<Topic>(this.globalsService.restUrl + '/topics', topic, httpOptions);
     }
 
 
     public updateTopic(topic: Topic): Observable<Topic> {
-        return this.http.put<Topic>(this._globalsService.restUrl + '/topics/' + topic._id, topic);
+        return this.http.put<Topic>(this.globalsService.restUrl + '/topics/' + topic._id, topic);
     }
 
 
     public deleteTopic(id: string): Observable<{}> {
-        return this.http.delete(this._globalsService.restUrl + '/topics/' + id);
+        return this.http.delete(this.globalsService.restUrl + '/topics/' + id);
     }
 }
