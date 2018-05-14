@@ -7,14 +7,16 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NameListService } from './name-list/name-list.service';
 import { GlobalsService } from './globals.service';
-import { MatIconModule, MatButtonModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatMenuModule, MatToolbarModule } from '@angular/material';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, RouterModule, MatIconModule, MatButtonModule,
+  MatMenuModule,
+MatToolbarModule],
   declarations: [ToolbarComponent, NavbarComponent],
   exports: [ToolbarComponent, NavbarComponent,
     CommonModule, FormsModule, RouterModule]

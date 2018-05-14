@@ -15,6 +15,7 @@ import { PostViewModule } from './post-view/post-view.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
 // import 'hammerjs';
 
 
@@ -27,6 +28,7 @@ import { RegisterModule } from './register/register.module';
     TopicViewModule,
     PostViewModule,
     RegisterModule,
+    LoginModule,
     BrowserAnimationsModule,
     SharedModule.forRoot()
   ],
