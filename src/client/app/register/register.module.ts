@@ -1,3 +1,4 @@
+import { RegisterRoutingModule } from './register-routing.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
@@ -12,6 +13,7 @@ import { RegisterComponent } from './register.component';
         CommonModule,
         FormsModule,
         RouterModule,
+        RegisterRoutingModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,

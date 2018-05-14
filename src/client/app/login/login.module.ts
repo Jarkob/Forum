@@ -5,6 +5,7 @@ import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { LoginRoutingModule } from './login-routing.module';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
         CommonModule,
         FormsModule,
         RouterModule,
+        LoginRoutingModule,
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
