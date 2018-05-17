@@ -1,9 +1,10 @@
+import { AuthenticationService } from './../services/authentication.service';
 import { LoginComponent } from './login.component';
 import { MatFormFieldModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule, MatCardModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginRoutingModule } from './login-routing.module';
 
@@ -14,6 +15,7 @@ import { LoginRoutingModule } from './login-routing.module';
         FormsModule,
         RouterModule,
         LoginRoutingModule,
+        ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
@@ -27,7 +29,7 @@ import { LoginRoutingModule } from './login-routing.module';
         LoginComponent
     ],
     providers: [
-        // authenticationService
+        AuthenticationService
     ]
 })
 export class LoginModule { }

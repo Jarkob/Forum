@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { GlobalsService } from '../../../../dist/tmp/app/shared/globals.service';
 import { User } from '../classes/user';
 import { HttpClient } from '@angular/common/http';
+import { GlobalsService } from '../shared/globals.service';
 
 @Injectable()
 export class AuthenticationService {
@@ -13,21 +13,12 @@ export class AuthenticationService {
 
     // TODO
     public login(email: string, password: string): Observable<any> {
-        return this.http.post<any>(this.globalsService.restUrl + '/authenticate', {email: email, password: password}).map(
-            user => {
-                // login successful, if there's a token in the response
-                if (user && user.token) {
-                    // store user details and jwt token in session storage
-                    // to keep user logged in between page refreshes
-                    sessionStorage.setItem('currentUser', JSON.stringify(user));
-                }
-                return user;
-            }
-        );
+        return this.http.post<User>(this.globalsService.restUrl + '/authenticate', {email: email, password: password});
     }
 
     // TODO
-    public isLoggedIn(): boolean {
+    public isAuthenticated(): boolean {
+        // check if token is valid
         return false;
     }
 
