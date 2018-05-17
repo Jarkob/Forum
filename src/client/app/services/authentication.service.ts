@@ -14,6 +14,9 @@ export class AuthenticationService {
     // TODO
     public login(email: string, password: string): Observable<any> {
         return this.http.post<User>(this.globalsService.restUrl + '/authenticate', {email: email, password: password});
+            // .do(
+            //     data => this.setSession
+            // );
     }
 
     // TODO
