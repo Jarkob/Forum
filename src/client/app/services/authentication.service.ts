@@ -14,8 +14,11 @@ export class AuthenticationService {
 
     public login(email: string, password: string): Observable<any> {
         return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
-            .pipe(
-                tap(data => this.setSession)
+            .pipe(// not working
+                tap(data => {
+                    console.log('data: ', data);
+                    this.setSession(data);
+                })
             );
     }
 
@@ -35,6 +38,8 @@ export class AuthenticationService {
     }
 
     private setSession(authResult: any) {
+        console.log(authResult);
+
         const currentTime = new Date();
         const expiresAt = new Date(currentTime.getTime() + authResult.expiresIn * 1000);
 
