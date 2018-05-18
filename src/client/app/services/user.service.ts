@@ -1,8 +1,8 @@
-import { GlobalsService } from './../../../../dist/tmp/app/shared/globals.service';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
+import { GlobalsService } from '../shared/globals.service';
 
 @Injectable()
 export class UserService {
@@ -16,7 +16,7 @@ export class UserService {
     }
 
     public getById(id: string): Observable<User> {
-        return this.http.get<User>(this.globalsService.restUrl + '/users/' + id);
+        return this.http.get<User>(this.globalsService.restUrl + '/user/' + id);
     }
 
     public create(user: User) {

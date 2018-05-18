@@ -1,31 +1,22 @@
-<form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+<form [formGroup]="form">
+    <div>
         <mat-form-field>
-            <input matInput type="text" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required placeholder="Firstname"/>
+            <input matInput maxlength="100" required name="username" formControlName="username" placeholder="Username">
         </mat-form-field>
-        <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+    <div>
         <mat-form-field>
-            <input matInput type="text" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required placeholder="Lastname"/>
+            <input matInput maxlength="100" required name="email" formControlName="email" placeholder="Email">
         </mat-form-field>
-        <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+    <div>
         <mat-form-field>
-            <input matInput type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Username"/>
+            <input matInput maxlength="100" required name="password" formControlName="password" placeholder="Password" type="password">
         </mat-form-field>
-        <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-        <mat-form-field>
-            <input matInput type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required placeholder="Password"/>
-        </mat-form-field>
-        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-    </div>
-    <div class="form-group">
-        <button mat-button color="accent" [disabled]="loading">Register</button>
-        <mat-spinner *ngIf="loading" [diameter]="50"></mat-spinner>
+    <div class="center">
+        <button mat-fab color="accent" (click)="register()">
+            <mat-icon>how_to_reg</mat-icon>
+        </button>
     </div>
 </form>
-<button mat-button color="accent" [disabled]="loading" [routerLink]="['/login']">Login</button>

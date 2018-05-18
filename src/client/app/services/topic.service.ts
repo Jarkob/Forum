@@ -10,7 +10,10 @@ const httpOptions = {
 
 @Injectable()
 export class TopicService {
-    constructor(private http: HttpClient, private globalsService: GlobalsService) {}
+    constructor(
+        private http: HttpClient,
+        private globalsService: GlobalsService
+    ) {}
 
     public getTopics(): Observable<Topic[]> {
         return this.http.get<Topic[]>(this.globalsService.restUrl + '/topics');

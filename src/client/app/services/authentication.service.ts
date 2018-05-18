@@ -12,6 +12,7 @@ export class AuthenticationService {
         private globalsService: GlobalsService
     ) { }
 
+
     public login(email: string, password: string): Observable<any> {
         return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
             .pipe(

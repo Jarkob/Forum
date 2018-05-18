@@ -1,10 +1,16 @@
+import { UserService } from './../services/user.service';
 import { RegisterRoutingModule } from './register-routing.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatCardModule } from '@angular/material';
+import {
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatIconModule } from '@angular/material';
 import { RegisterComponent } from './register.component';
 
 @NgModule({
@@ -14,11 +20,12 @@ import { RegisterComponent } from './register.component';
         FormsModule,
         RouterModule,
         RegisterRoutingModule,
+        ReactiveFormsModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
-        MatProgressSpinnerModule,
-        MatCardModule
+        MatCardModule,
+        MatIconModule
     ],
     declarations: [
         RegisterComponent
@@ -27,7 +34,7 @@ import { RegisterComponent } from './register.component';
         RegisterComponent
     ],
     providers: [
-        // UserService
+        UserService
     ]
 })
 export class RegisterModule { }

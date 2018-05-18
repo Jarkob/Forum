@@ -1,3 +1,11 @@
-.form-group mat-form-field {
+form {
+    padding: 1em;
+}
+
+mat-form-field, form input, form textarea {
     width: 100%;
+}
+
+.center {
+    text-align: center;
 }
