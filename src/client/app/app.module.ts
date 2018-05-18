@@ -1,3 +1,4 @@
+import { AuthenticationInterceptor } from './services/authentication.interceptor';
 import { TopicViewModule } from './topic-view/topic-view.module';
 import { TopicService } from './services/topic.service';
 import { PostService } from './services/post.service';
@@ -6,7 +7,7 @@ import { TopicOverviewModule } from './topic-overview/topic-overview.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -39,7 +40,12 @@ import { LoginModule } from './login/login.module';
   },
     CommentService,
     PostService,
-    TopicService
+    TopicService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 
