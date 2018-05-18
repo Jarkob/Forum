@@ -38,8 +38,6 @@ export class AuthenticationService {
     }
 
     private setSession(authResult: any) {
-        console.log(authResult);
-
         const currentTime = new Date();
         const expiresAt = new Date(currentTime.getTime() + authResult.expiresIn * 1000);
 
