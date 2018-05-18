@@ -14,7 +14,6 @@ export class ToolbarComponent implements OnChanges {
 
     constructor(private location: Location, private authenticationService: AuthenticationService) {
         this.isLoggedIn = this.authenticationService.isLoggedIn();
-        console.log(this.isLoggedIn);
     }
 
     public navigateBack() {
@@ -27,10 +26,10 @@ export class ToolbarComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         this.isLoggedIn = this.authenticationService.isLoggedIn();
-        console.log(this.isLoggedIn);
     }
 
     public logout() {
         this.authenticationService.logout();
+        console.log('logged out');
     }
 }
