@@ -14,9 +14,8 @@ export class AuthenticationService {
 
     public login(email: string, password: string): Observable<any> {
         return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
-            .pipe(// not working
+            .pipe(
                 tap(data => {
-                    console.log('data: ', data);
                     this.setSession(data);
                 })
             );
@@ -25,7 +24,8 @@ export class AuthenticationService {
 
     public isLoggedIn(): boolean {
         // check if token is valid
-        return new Date() < new Date(JSON.parse(sessionStorage.getItem('expires_at')));
+        return (sessionStorage.getItem('token') != null && sessionStorage.getItem('expires_at') != null)
+            && (new Date() < new Date(JSON.parse(sessionStorage.getItem('expires_at'))));
     }
 
     public isLoggedOut(): boolean {

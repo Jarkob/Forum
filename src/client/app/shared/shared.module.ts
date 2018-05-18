@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NameListService } from './name-list/name-list.service';
 import { GlobalsService } from './globals.service';
 import { MatIconModule, MatButtonModule, MatMenuModule, MatToolbarModule } from '@angular/material';
+import { AuthenticationService } from '../services/authentication.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -19,7 +20,8 @@ import { MatIconModule, MatButtonModule, MatMenuModule, MatToolbarModule } from 
 MatToolbarModule],
   declarations: [ToolbarComponent, NavbarComponent],
   exports: [ToolbarComponent, NavbarComponent,
-    CommonModule, FormsModule, RouterModule]
+    CommonModule, FormsModule, RouterModule],
+  providers: [AuthenticationService]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
