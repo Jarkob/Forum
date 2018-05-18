@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { HttpClient } from '@angular/common/http';
@@ -11,22 +12,33 @@ export class AuthenticationService {
         private globalsService: GlobalsService
     ) { }
 
-    // TODO
     public login(email: string, password: string): Observable<any> {
-        return this.http.post<User>(this.globalsService.restUrl + '/authenticate', {email: email, password: password});
-            // .do(
-            //     data => this.setSession
-            // );
+        return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
+            .pipe(
+                tap(data => this.setSession)
+            );
     }
 
-    // TODO
-    public isAuthenticated(): boolean {
+
+    public isLoggedIn(): boolean {
         // check if token is valid
-        return false;
+        return new Date() < new Date(JSON.parse(sessionStorage.getItem('expires_at')));
+    }
+
+    public isLoggedOut(): boolean {
+        return !this.isLoggedIn();
     }
 
     public logout(): void {
-        // remove user from session storage to log user out
-        sessionStorage.removeItem('currentUser');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('expires_at');
+    }
+
+    private setSession(authResult: any) {
+        const currentTime = new Date();
+        const expiresAt = new Date(currentTime.getTime() + authResult.expiresIn * 1000);
+
+        sessionStorage.setItem('token', authResult.token);
+        sessionStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     }
 }
