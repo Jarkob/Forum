@@ -1,3 +1,4 @@
+import { User } from './../../classes/user';
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -11,9 +12,11 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class ToolbarComponent implements OnChanges {
 
     private isLoggedIn: boolean;
+    private currentUser: User;
 
     constructor(private location: Location, private authenticationService: AuthenticationService) {
         this.isLoggedIn = this.authenticationService.isLoggedIn();
+        this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
     }
 
     public navigateBack() {
@@ -26,6 +29,7 @@ export class ToolbarComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         this.isLoggedIn = this.authenticationService.isLoggedIn();
+        this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
     }
 
     public logout() {
