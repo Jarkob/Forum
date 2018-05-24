@@ -2,7 +2,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/mgechev/angular-seed.svg)](https://greenkeeper.io/)
 
-[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
+[![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/guide/styleguide)
 [![Build Status](https://travis-ci.org/mgechev/angular-seed.svg?branch=master)](https://travis-ci.org/mgechev/angular-seed)
 [![Build Status](https://ci.appveyor.com/api/projects/status/jg5vg36w0klpa00e/branch/master?svg=true)](https://ci.appveyor.com/project/mgechev/angular2-seed)
 [![Join the chat at https://gitter.im/mgechev/angular2-seed](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mgechev/angular2-seed?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -24,9 +24,9 @@ Provides fast, reliable and extensible starter for the development of Angular pr
 - **Tree-Shaking** production builds with Rollup.
 - Uses codelyzer for static code analysis, which verifies that the project follows practices from the Angular style guide.
 - Sample unit tests with Jasmine and Karma including code coverage via [istanbul](https://gotwarlost.github.io/istanbul/).
-- End-to-end tests with Protractor.
+- End-to-end tests with Cypress.
 - Development server with Livereload.
-- Following the [best practices](https://angular.io/styleguide).
+- Following the [best practices](https://angular.io/guide/styleguide).
 - Provides full Docker support for both development and production environment
 - Support for Angular Mobile Toolkit
 - Allows you to analyze the space usage of created bundles by using source-map-explorer
@@ -65,6 +65,8 @@ $ npm run build.dev
 # prod build, will output the production application in `dist/prod`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod
+# prod build using different base path
+$ npm run build.prod -- --base "/foo/bar/"
 
 # dev build of multiple applications (by default the value of --app is "app")
 $ npm start -- --app baz
@@ -100,7 +102,7 @@ $ npm run build.prod.rollup.aot
 Your project will be compiled ahead of time (AOT), and then the resulting bundle will be tree-shaken and minified. During the tree-shaking process Rollup statically analyses your code, and your dependencies, and includes the bare minimum in your bundle.
 
 **Notes**
-- Beware of non-static/side-effectful imports. These cannot be properly optimized. For this reason, even though tree-shaking is taking place the developer still needs to be careful not to include non-static imports that are unnecessary, as those referenced imports will always end up in final bundle. Special attention should be given to RxJs, which makes heavy use of non-static/side-effectful imports: make sure you only add the operators you use, as any added operators will be included in your final production bundle.
+- Beware of non-static/side-effectful imports. These cannot be properly optimized. For this reason, even though tree-shaking is taking place the developer still needs to be careful not to include non-static imports that are unnecessary, as those referenced imports will always end up in final bundle. Special attention should be given to RxJs, which makes heavy use of non-static/side-effectful imports: make sure you only [pipeable operators](https://github.com/ReactiveX/rxjs/blob/master/doc/pipeable-operators.md).
 - UMD modules result in code that cannot be properly optimized. For best results, prefer ES6 modules whenever possible. This includes third-party dependencies: if one is published in both UMD and ES6 modules, go with the ES6 modules version.
 - During a production build, CommonJs modules will be automatically converted to ES6 modules. This means you can use them and/or require dependencies that use them without any issues.
 
@@ -268,21 +270,17 @@ $ ulimit -n 10480
 # view coverage report:
 $ npm run serve.coverage
 
-# e2e (aka. end-to-end, integration) - In three different shell windows
-# Make sure you don't have a global instance of Protractor
-# Make sure you do have Java in your PATH (required for webdriver)
-
-# npm install webdriver-manager <- Install this first for e2e testing
-# npm run webdriver-update <- You will need to run this the first time
-$ npm run webdriver-start
-$ npm run serve.e2e
+# e2e (aka. end-to-end, integration)  - In two different shell windows
+$ npm start
 $ npm run e2e
 
-# e2e live mode - Protractor interactive mode
-# Instead of last command above, you can use:
+# e2e - In one shell window (especially useful for Continuous Integration)
+$ npm run e2e.ci
+
+# e2e live mode - Using Cypress app - In two different shell windows
+$ npm start
 $ npm run e2e.live
 ```
-You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
 
 # Contributing
 
@@ -325,6 +323,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
  - http://ngbot.io - a chat bot built with angular-seed.
  - [angular-seed-inspinia](https://github.com/DmitriyPotapov/angular-seed-inspinia) - integration with custom design template
  - [telerik/kendo-angular-quickstart-seed](https://github.com/telerik/kendo-angular-quickstart-seed) - integration with Kendo UI for Angular
+ - https://github.com/vyakymenko/angular-lib-starter-pack - sample how to create your library compatible with [Angular Seed](https://github.com/mgechev/angular-seed) with [integration guide](https://github.com/vyakymenko/angular-lib-starter-pack#test-your-library-with-angular-seed-or-angular-seed-express).
 
 # Directory Structure
 
@@ -342,7 +341,20 @@ Forks of this project demonstrate how to extend and integrate with other librari
 ├── gulpfile.ts                <- configuration of the gulp tasks
 ├── karma.conf.js              <- configuration of the test runner
 ├── package.json               <- dependencies of the project
-├── protractor.conf.js         <- e2e tests configuration
+├── cypress
+|   ├── fixtures
+|   |   └── example.json
+|   ├── integration
+|   |   ├── about.component.e2e-spec.ts
+|   |   ├── app.component.e2e-spec.ts
+|   |   └── home.component.e2e-spec.ts
+|   ├── plugins
+|   |   ├── cy-ts-preprocessor.js
+|   |   └── index.js
+|   ├── support
+|   |   ├── commands.js
+|   |   └── index.js
+|   └── tsconfig.json
 ├── src
 │   ├── client
 │   │   ├── app
@@ -369,7 +381,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── i18n.providers.ts
 │   │   │   ├── main-prod.ts
 │   │   │   ├── main.ts
-│   │   │   ├── operators.ts
 │   │   │   └── shared
 │   │   │       ├── config
 │   │   │       │   └── env.config.ts
@@ -398,12 +409,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   ├── ngsw-config.json
 │   │   ├── system-config.ts
 │   │   └── tsconfig.json
-│   └── e2e
-│       ├── specs
-│       │   ├── about.component.e2e-spec.ts
-│       │   ├── app.component.e2e-spec.ts
-│       │   └── home.component.e2e-spec.ts
-│       └── tsconfig.json
 ├── test-config.js             <- testing configuration
 ├── test-main.js               <- karma test launcher
 ├── tools
@@ -435,7 +440,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │       ├── karma.d.ts
 │   │       ├── merge-stream.d.ts
 │   │       ├── open.d.ts
-│   │       ├── operators.d.ts
 │   │       ├── slash.d.ts
 │   │       ├── systemjs-builder.d.ts
 │   │       └── tildify.d.ts
@@ -447,7 +451,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   └── seed               <- seed generic gulp tasks. They can be overriden by the project specific gulp tasks
 │   │   │   ├── build.assets.dev.ts
 │   │   │   ├── build.assets.prod.ts
-│   │   │   ├── build.bundle.rxjs.ts
 │   │   │   ├── build.bundles.app.aot.ts
 │   │   │   ├── build.bundles.app.rollup.aot.ts
 │   │   │   ├── build.bundles.app.ts
@@ -457,7 +460,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── build.index.dev.ts
 │   │   │   ├── build.index.prod.ts
 │   │   │   ├── build.js.dev.ts
-│   │   │   ├── build.js.e2e.ts
 │   │   │   ├── build.js.prod.aot.ts
 │   │   │   ├── build.js.prod.rollup.aot.ts
 │   │   │   ├── build.js.prod.ts
@@ -471,7 +473,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── clean.all.ts
 │   │   │   ├── clean.coverage.ts
 │   │   │   ├── clean.dev.ts
-│   │   │   ├── clean.e2e.ts
 │   │   │   ├── clean.prod.ts
 │   │   │   ├── clean.sme.ts
 │   │   │   ├── clean.tools.ts
@@ -502,9 +503,7 @@ Forks of this project demonstrate how to extend and integrate with other librari
 │   │   │   ├── transpile.bundles.rollup.aot.ts
 │   │   │   ├── tslint.ts
 │   │   │   ├── watch.dev.ts
-│   │   │   ├── watch.e2e.ts
-│   │   │   ├── watch.test.ts
-│   │   │   └── webdriver.ts
+│   │   │   └── watch.test.ts
 │   │   ├── task.ts
 │   │   └── typescript_task.ts
 │   ├── utils                  <- build utils

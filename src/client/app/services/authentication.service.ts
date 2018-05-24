@@ -1,10 +1,10 @@
-import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { HttpClient } from '@angular/common/http';
 import { GlobalsService } from '../shared/globals.service';
 import { UserService } from './user.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {

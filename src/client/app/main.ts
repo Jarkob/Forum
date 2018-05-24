@@ -15,9 +15,6 @@ if (String('<%= BUILD_TYPE %>') === 'prod') {
   enableProdMode();
 }
 
-// Immer Prodmode
-enableProdMode();
-
 // Compile and launch the module with i18n providers
 // let TP = new TranslationProviders();
 // TP.getTranslationFile().then((providers: any) => {
