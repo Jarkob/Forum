@@ -16,7 +16,7 @@ export class TopicOverviewComponent implements OnInit {
     private editTopic = false;
     private editId: string;
 
-    constructor(private _topicService: TopicService) { }
+    constructor(private topicService: TopicService) { }
 
     ngOnInit(): void {
         this.getTopics();
@@ -24,7 +24,7 @@ export class TopicOverviewComponent implements OnInit {
 
 
     private getTopics() {
-        this._topicService.getTopics().subscribe(
+        this.topicService.getTopics().subscribe(
             data => {
                 this.topics = data;
             }
@@ -37,7 +37,7 @@ export class TopicOverviewComponent implements OnInit {
         topic._id = null;
         topic.title = title;
 
-        this._topicService.createTopic(topic).subscribe(
+        this.topicService.createTopic(topic).subscribe(
             data => {
                 this.getTopics();
             }
@@ -57,7 +57,7 @@ export class TopicOverviewComponent implements OnInit {
                 }
             });
 
-            this._topicService.updateTopic(topic).subscribe();
+            this.topicService.updateTopic(topic).subscribe();
         } else {
             this.editTopic = true;
             this.editId = topicId;
@@ -68,7 +68,7 @@ export class TopicOverviewComponent implements OnInit {
         this.editId = id;
         this.editTopic = true;
 
-        this._topicService.deleteTopic(id).subscribe(
+        this.topicService.deleteTopic(id).subscribe(
             data => {
                 this.getTopics();
             }

@@ -1,8 +1,8 @@
+import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { GlobalsService } from '../shared/globals.service';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -20,6 +20,8 @@ export class UserService {
     }
 
     public create(user: User) {
+        console.log('Attempting to take route: ', this.globalsService.restUrl + '/users');
+        console.log('User: ', user);
         return this.http.post(this.globalsService.restUrl + '/users', user);
     }
 

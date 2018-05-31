@@ -41,8 +41,10 @@ export class RegisterComponent {
         user.password = value.password;
 
         if (user.username && user.email && user.password) {
+            console.log('attempt to create user');
             this.userService.create(user).subscribe(
                 () => {
+                    console.log('user was created');
                     this.router.navigateByUrl('/login');
                 }
             );

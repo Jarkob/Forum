@@ -1,10 +1,10 @@
+import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { HttpClient } from '@angular/common/http';
 import { GlobalsService } from '../shared/globals.service';
 import { UserService } from './user.service';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {
@@ -16,12 +16,20 @@ export class AuthenticationService {
 
 
     public login(email: string, password: string): Observable<any> {
+        console.log('before login service');
+        // return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
+        //     .pipe(
+        //         tap(data => {
+        //             // console.log('debug: in login service');
+        //             this.setSession(data);
+        //         })
+        //     );
         return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
-            .pipe(
-                tap(data => {
-                    this.setSession(data);
-                })
-            );
+        .pipe(
+            tap(
+                data => {console.log('debug: in login service'); }
+            )
+        );
     }
 
 
@@ -42,6 +50,7 @@ export class AuthenticationService {
     }
 
     private setSession(authResult: any) {
+        console.log('IN SETSESSION');
         const currentTime = new Date();
         const expiresAt = new Date(currentTime.getTime() + authResult.expiresIn * 1000);
 

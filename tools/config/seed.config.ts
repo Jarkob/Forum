@@ -427,6 +427,12 @@ export class SeedConfig {
       inject: 'shims',
       buildType: BUILD_TYPES.DEVELOPMENT
     },
+    // Temporary fix. See https://github.com/angular/angular/issues/9359
+    {
+      src: '.tmp/Rx.min.js',
+      inject: 'libs',
+      buildType: BUILD_TYPES.DEVELOPMENT
+    }
   ];
 
   /**
@@ -471,12 +477,6 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
-    bundles: {
-      'node_modules/.tmp/Rx.min.js': [
-        'rxjs',
-        'rxjs/*'
-      ]
-    },
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations':
@@ -512,6 +512,7 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing':
         'node_modules/@angular/router/bundles/router-testing.umd.js',
+      'rxjs/operators': 'node_modules/rxjs/operators/index.js',
 
       'app/': `${this.APP_BASE}app/`,
       // For test config
@@ -559,7 +560,7 @@ export class SeedConfig {
       '@angular/common/http':
         'node_modules/@angular/common/bundles/common-http.umd.js',
       'tslib': 'node_modules/tslib/tslib.js',
-      'rxjs': 'node_modules/rxjs',
+      'rxjs/operators': 'node_modules/rxjs/operators/index.js',
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
@@ -605,24 +606,8 @@ export class SeedConfig {
         main: 'bundles/service-worker.umd.js',
         defaultExtension: 'js'
       },
-      'rxjs': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      'rxjs/ajax': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      'rxjs/operators': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      'rxjs/testing': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      'rxjs/webSocket': {
-        main: 'index.js',
+      rxjs: {
+        main: 'Rx.js',
         defaultExtension: 'js'
       }
     }

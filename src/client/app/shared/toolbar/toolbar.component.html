@@ -1,4 +1,4 @@
-<!-- <mat-toolbar color="primary">
+<mat-toolbar color="primary">
     <button mat-icon-button (click)="navigateBack()">
         <mat-icon>arrow_back_ios</mat-icon>
     </button>
@@ -7,6 +7,8 @@
     </button>
 
     <span [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Forum</span>
+
+    <!-- <span [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Topics</span> -->
 
     <span *ngIf="!this.isLoggedIn" [routerLink]="['/login']">Login</span>
     <span *ngIf="this.isLoggedIn" (click)="logout()">Logout</span>
@@ -17,13 +19,13 @@
     </span>
 
     <button class="more" mat-icon-button [matMenuTriggerFor]="menu">
+        <!-- <mat-icon>more_vert</mat-icon> -->
         <mat-icon>menu</mat-icon>
+        <!-- <mat-icon>settings</mat-icon> -->
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
         <button mat-menu-item>
             Impressum
         </button>
     </mat-menu>
-</mat-toolbar> -->
-
-<p>Toolbar doesn't work</p>
+</mat-toolbar>

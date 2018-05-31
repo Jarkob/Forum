@@ -1,30 +1,52 @@
+import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
+import { TopicViewModule } from './topic-view/topic-view.module';
+import { TopicService } from './services/topic.service';
+import { PostService } from './services/post.service';
+import { CommentService } from './services/comment.service';
+import { TopicOverviewModule } from './topic-overview/topic-overview.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AboutModule } from './about/about.module';
-import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
+import { PostViewModule } from './post-view/post-view.module';
+import { AuthenticationInterceptor } from './services/authentication.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// import 'hammerjs';
 
 
 @NgModule({
   imports: [
     BrowserModule,
-    CoreModule,
     HttpClientModule,
     AppRoutingModule,
-    AboutModule,
-    HomeModule,
-    SharedModule.forRoot()],
+    TopicOverviewModule,
+    TopicViewModule,
+    PostViewModule,
+    LoginModule,
+    RegisterModule,
+    BrowserAnimationsModule,
+    SharedModule.forRoot()
+  ],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,
-    useValue: '<%= APP_BASE %>'
-  }],
+    useValue: '<%= APP_BASE %>',
+  },
+    CommentService,
+    PostService,
+    TopicService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 
 })

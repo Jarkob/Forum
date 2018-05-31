@@ -20,10 +20,11 @@
       "../../node_modules"
     ],
     "types": [
-      "cypress",
-      "mocha",
+      "express",
       "jasmine",
-      "node"
+      "node",
+      "protractor",
+      "systemjs"
     ]
   },
   "exclude": [
@@ -32,12 +33,6 @@
     "node_modules",
     "dist",
     "src"
-  ],
-  "include": [
-    "integration/*.ts",
-    "support/*.ts",
-    "../node_modules/cypress",
-    "../node_modules/@types/mocha"
   ],
   "compileOnSave": false
 }

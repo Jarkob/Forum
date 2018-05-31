@@ -13,7 +13,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-    this.APP_TITLE = 'Forum';
+    // this.APP_TITLE = 'Put name of your app here';
     // this.GOOGLE_ANALYTICS_ID = 'Your site's ID';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
@@ -49,10 +49,14 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     // Add packages (e.g. ng2-translate)
+    // const additionalPackages: ExtendPackages[] = [{
+    //   name: 'ng2-translate',
+    //   // Path to the package's bundle
+    //   path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
+    // }];
+    //
+    // this.addPackagesBundles(additionalPackages);
     const additionalPackages: ExtendPackages[] = [
-      // name: 'ng2-translate',
-      // Path to the package's bundle
-      // path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
       {
         name: '@angular/material',
         path: 'node_modules/@angular/material/bundles/material.umd.js'
@@ -120,6 +124,7 @@ export class ProjectConfig extends SeedConfig {
     ];
 
     this.addPackagesBundles(additionalPackages);
+
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [
