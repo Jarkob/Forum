@@ -158,11 +158,10 @@ export class PostViewComponent implements OnInit, OnDestroy {
     }
 
 
-    private createComment(username: string, text: string): void {
+    private createComment(text: string): void {
         const comment: Comment = new Comment();
         comment.postId = this.post._id;
         comment.text = text;
-        comment.username = username;
 
         this._commentService.createComment(comment).subscribe(
             data => {

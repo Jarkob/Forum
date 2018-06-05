@@ -14,7 +14,7 @@ export class ToolbarComponent implements OnChanges {
     private isLoggedIn: boolean;
     private currentUser: User;
 
-    constructor(private location: Location, private authenticationService: AuthenticationService) {
+    constructor(private location: Location, public authenticationService: AuthenticationService) {
         this.isLoggedIn = this.authenticationService.isLoggedIn();
         this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
     }

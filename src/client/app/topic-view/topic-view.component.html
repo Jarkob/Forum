@@ -25,14 +25,7 @@
         </mat-form-field>
     </div>
 
-    <div>
-        <mat-form-field>
-            <input matInput maxlength="20" required #newUser placeholder="Name">
-            <mat-hint align="end">{{ newUser.value.length }} / 20</mat-hint>
-        </mat-form-field>
-    </div>
-
-    <button mat-fab color="accent" (click)="createPost(newTitle.value, newText.value, newUser.value); newTitle.value = null; newText.value = null; newUser.value = null">
+    <button mat-fab color="accent" (click)="createPost(newTitle.value, newText.value); newTitle.value = null; newText.value = null">
         <mat-icon>add</mat-icon>
     </button>
 </form>

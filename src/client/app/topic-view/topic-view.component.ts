@@ -55,11 +55,10 @@ export class TopicViewComponent implements OnInit, OnDestroy {
     }
 
 
-    private createPost(title: string, text: string, username: string): void {
+    private createPost(title: string, text: string): void {
         const post: Post = new Post();
         post.title = title;
         post.text = text;
-        post.username = username;
         post.topicId = this.topic._id;
         post.status = 'open';
 

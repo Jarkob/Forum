@@ -27,6 +27,10 @@ export class PostService {
         if (!post.postTime) {
             post.postTime = new Date();
         }
+
+        // set username
+        post.username = JSON.parse(sessionStorage.getItem('current_user')).username;
+
         return this.http.post<Post>(this._globalsService.restUrl + '/posts', post, httpOptions);
     }
 

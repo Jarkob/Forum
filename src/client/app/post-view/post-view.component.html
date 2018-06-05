@@ -75,15 +75,11 @@
             </li>
             <li *ngIf="this.post.status === 'open'">
                 <div class="add-comment">
-                    <mat-form-field>
-                        <input matInput maxlength="20" required #newUser placeholder="Name">
-                        <mat-hint align="end">{{ newUser.value.length }} / 20</mat-hint>
-                    </mat-form-field>
                     <mat-form-field class="half-width">
                         <textarea matInput maxlength="2000" matTextareaAutosize required #newComment placeholder="Kommentar"></textarea>
                         <mat-hint align="end">{{ newComment.value.length }} / 2000</mat-hint>
                     </mat-form-field>
-                    <button mat-fab color="accent" (click)="createComment(newUser.value, newComment.value); newUser.value = null; newComment.value = null">
+                    <button mat-fab color="accent" (click)="createComment(newComment.value); newComment.value = null">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>

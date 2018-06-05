@@ -22,6 +22,10 @@ export class CommentService {
         if (!comment.commentTime) {
             comment.commentTime = new Date();
         }
+
+        // set username
+        comment.username = JSON.parse(sessionStorage.getItem('current_user')).username;
+
         return this.http.post<Comment>(this._globalsService.restUrl + '/comments', comment, httpOptions);
     }
 
