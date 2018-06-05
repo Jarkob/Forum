@@ -16,18 +16,10 @@ export class AuthenticationService {
 
 
     public login(email: string, password: string): Observable<any> {
-        console.log('before login service');
-        // return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
-        //     .pipe(
-        //         tap(data => {
-        //             // console.log('debug: in login service');
-        //             this.setSession(data);
-        //         })
-        //     );
         return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
         .pipe(
             tap(
-                data => {console.log('debug: in login service'); }
+                data => {this.setSession(data); }
             )
         );
     }
@@ -50,7 +42,6 @@ export class AuthenticationService {
     }
 
     private setSession(authResult: any) {
-        console.log('IN SETSESSION');
         const currentTime = new Date();
         const expiresAt = new Date(currentTime.getTime() + authResult.expiresIn * 1000);
 
