@@ -2,7 +2,7 @@
     <li>
         <mat-card *ngIf="this.post">
             <h3>{{ this.post.title }}</h3>
-            <i>von {{ this.post.username }} vor {{ this.post.timeDifference }}</i>
+            <i>von {{ this.post.username }} - {{ this.post.postTime | date:'full' }}</i>
             
             <span class="right-buttons">
                 <button *ngIf="this.post.status === 'open'" mat-fab color="accent" (click)="updatePost()">
@@ -59,7 +59,7 @@
                             </button>
                         </span>
 
-                        <i>von {{ comment.username }} vor {{ comment.timeDifference }}</i>
+                        <i>von {{ comment.username }} - {{ comment.commentTime | date:'full' }}</i>
                     </p>
                     <p *ngIf="!editComment || editId != comment._id">
                         {{ comment.text }}
