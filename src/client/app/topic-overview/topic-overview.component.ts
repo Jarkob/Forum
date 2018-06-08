@@ -1,8 +1,12 @@
-import { TopicService } from './../services/topic.service';
-import { Comment } from './../classes/comment';
 import { Component, OnInit } from '@angular/core';
+
+import { TopicService } from './../services/topic.service';
 import { Topic } from '../classes/topic';
 
+/**
+ * an overview of all existing topics
+ * TODO: refactoring
+ */
 @Component({
     moduleId: module.id,
     selector: 'sd-topic-overview',
@@ -16,14 +20,23 @@ export class TopicOverviewComponent implements OnInit {
     private editTopic = false;
     private editId: string;
 
+    /**
+     * initialize component
+     * @param topicService to access topic data from the backend
+     */
     constructor(private topicService: TopicService) { }
 
+    /**
+     * on init the component should get an updated version of all topics
+     */
     ngOnInit(): void {
         this.getTopics();
     }
 
-
-    private getTopics() {
+    /**
+     * subscribes to the topicService and gets all topics
+     */
+    private getTopics(): void {
         this.topicService.getTopics().subscribe(
             data => {
                 this.topics = data;
@@ -31,7 +44,10 @@ export class TopicOverviewComponent implements OnInit {
         );
     }
 
-
+    /**
+     * create a new topic
+     * @param title the title of the new topic
+     */
     private createTopic(title: string): void {
         const topic: Topic = new Topic();
         topic._id = null;
@@ -44,7 +60,11 @@ export class TopicOverviewComponent implements OnInit {
         );
     }
 
-
+    /**
+     * if the topic is selected for editing it is updated
+     * else it is selected for editing
+     * @param topicId the id of the topic to be updated
+     */
     private updateTopic(topicId: string): void {
         if (this.editTopic) {
             this.editTopic = false;
@@ -64,6 +84,10 @@ export class TopicOverviewComponent implements OnInit {
         }
     }
 
+    /**
+     * delete a topic
+     * @param id the id of the topic to be deleted
+     */
     private deleteTopic(id: string): void {
         this.editId = id;
         this.editTopic = true;
