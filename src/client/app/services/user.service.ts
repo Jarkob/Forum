@@ -4,12 +4,15 @@ import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { GlobalsService } from '../shared/globals.service';
 
+/**
+ * simple crud service for users
+ */
 @Injectable()
 export class UserService {
+
     constructor(
         private http: HttpClient,
-        private globalsService: GlobalsService
-    ) { }
+        private globalsService: GlobalsService) { }
 
     public getAll(): Observable<Array<User>> {
         return this.http.get<User[]>(this.globalsService.restUrl + '/users');
@@ -20,8 +23,6 @@ export class UserService {
     }
 
     public create(user: User) {
-        console.log('Attempting to take route: ', this.globalsService.restUrl + '/users');
-        console.log('User: ', user);
         return this.http.post(this.globalsService.restUrl + '/users', user);
     }
 

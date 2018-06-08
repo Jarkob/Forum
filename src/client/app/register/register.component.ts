@@ -1,9 +1,14 @@
-import { UserService } from './../services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { UserService } from './../services/user.service';
 import { User } from '../classes/user';
 
+/**
+ * shows a register page
+ * TODO: refactor
+ */
 @Component({
     moduleId: module.id,
     templateUrl: 'register.component.html',
@@ -14,6 +19,13 @@ export class RegisterComponent {
     form: FormGroup;
     loading = false;
 
+    /**
+     * initialize component
+     * @param formBuilder formbuilder instance
+     * @param activatedRoute the activated route
+     * @param router the router to navigate
+     * @param userService to access user data
+     */
     constructor(
         private formBuilder: FormBuilder,
         private activatedRoute: ActivatedRoute,
@@ -27,12 +39,11 @@ export class RegisterComponent {
         });
     }
 
-
+    /**
+     * create new user
+     */
     private register(): void {
         this.loading = true;
-        // create new user in userservice, subscribe
-        // if successful redirect to login page
-        // else give error
 
         const value = this.form.value;
         const user = new User();

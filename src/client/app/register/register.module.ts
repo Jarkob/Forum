@@ -1,4 +1,3 @@
-import { UserService } from './../services/user.service';
 import { RegisterRoutingModule } from './register-routing.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -11,8 +10,13 @@ import {
     MatInputModule,
     MatCardModule,
     MatIconModule } from '@angular/material';
-import { RegisterComponent } from './register.component';
 
+import { RegisterComponent } from './register.component';
+import { UserService } from './../services/user.service';
+
+/**
+ * contains everything for register
+ */
 @NgModule({
     imports: [
         SharedModule,
@@ -27,14 +31,8 @@ import { RegisterComponent } from './register.component';
         MatCardModule,
         MatIconModule
     ],
-    declarations: [
-        RegisterComponent
-    ],
-    exports: [
-        RegisterComponent
-    ],
-    providers: [
-        UserService
-    ]
+    declarations: [RegisterComponent],
+    exports: [RegisterComponent],
+    providers: [UserService]
 })
 export class RegisterModule { }

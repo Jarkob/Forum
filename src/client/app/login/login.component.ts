@@ -1,8 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { AuthenticationService } from '../services/authentication.service';
 
+/**
+ * shows a login screen
+ * TODO: refactor
+ */
 @Component({
     moduleId: module.id,
     templateUrl: 'login.component.html',
@@ -14,6 +19,13 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
 
+    /**
+     * initialize component
+     * @param fb formbuilder instance
+     * @param route the activated route
+     * @param router the router to navigate away
+     * @param authenticationService to authenticate the user
+     */
     constructor(
         private fb: FormBuilder,
         private route: ActivatedRoute,
@@ -26,6 +38,10 @@ export class LoginComponent implements OnInit {
         });
     }
 
+    /**
+     * set return url
+     * TODO
+     */
     ngOnInit(): void {
         // reset login status
         this.authenticationService.logout();
@@ -34,6 +50,9 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
+    /**
+     * login user
+     */
     private login(): void {
         this.loading = true;
         const val = this.form.value;

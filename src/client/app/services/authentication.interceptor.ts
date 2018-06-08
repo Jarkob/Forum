@@ -2,6 +2,9 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 
+/**
+ * adds jwt token to http requests for authentication
+ */
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
 

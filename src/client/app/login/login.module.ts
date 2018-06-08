@@ -1,5 +1,8 @@
-import { AuthenticationService } from './../services/authentication.service';
-import { LoginComponent } from './login.component';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from './../shared/shared.module';
 import {
     MatFormFieldModule,
     MatInputModule,
@@ -7,13 +10,14 @@ import {
     MatProgressSpinnerModule,
     MatCardModule,
     MatIconModule } from '@angular/material';
-import { CommonModule } from '@angular/common';
-import { SharedModule } from './../shared/shared.module';
-import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { LoginRoutingModule } from './login-routing.module';
 
+import { LoginComponent } from './login.component';
+import { LoginRoutingModule } from './login-routing.module';
+import { AuthenticationService } from './../services/authentication.service';
+
+/**
+ * contains everything to handle login
+ */
 @NgModule({
     imports: [
         SharedModule,
@@ -29,14 +33,8 @@ import { LoginRoutingModule } from './login-routing.module';
         MatProgressSpinnerModule,
         MatCardModule
     ],
-    declarations: [
-        LoginComponent
-    ],
-    exports: [
-        LoginComponent
-    ],
-    providers: [
-        AuthenticationService
-    ]
+    declarations: [LoginComponent],
+    exports: [LoginComponent],
+    providers: [AuthenticationService]
 })
 export class LoginModule { }
