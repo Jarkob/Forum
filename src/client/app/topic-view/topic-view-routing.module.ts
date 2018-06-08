@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
-import { TopicViewComponent } from './topic-view.component';
 import { RouterModule } from '@angular/router';
 
+import { TopicViewComponent } from './topic-view.component';
+
+/**
+ * handles routing to the topic view
+ */
 @NgModule({
     imports: [
         RouterModule.forChild([
