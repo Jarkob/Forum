@@ -1,11 +1,15 @@
-import { Comment } from './../classes/comment';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Post } from '../classes/post';
-import { CommentService } from '../services/comment.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PostService } from '../services/post.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
 
+import { Post } from '../classes/post';
+import { Comment } from './../classes/comment';
+import { CommentService } from '../services/comment.service';
+import { PostService } from '../services/post.service';
+
+/**
+ * a view a single post showing all belonging comments
+ * TODO: refactoring
+ */
 @Component({
     moduleId: module.id,
     selector: 'sd-post-view',
@@ -25,28 +29,41 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private post: Post;
     private comments: Comment[] = [];
 
-    constructor(private router: Router,
+    /**
+     * initialize component
+     * @param router for navigationg
+     * @param route the active route for access to the postId in the url
+     * @param postService to access post data
+     * @param commentService to access comment data
+     */
+    constructor(
+        private router: Router,
         private route: ActivatedRoute,
-        private _postService: PostService,
-        private _commentService: CommentService,
-        public dialog: MatDialog
-    ) { }
+        private postService: PostService,
+        private commentService: CommentService) { }
 
-    ngOnInit() {
+    /**
+     * on init the post should be loaded
+     */
+    ngOnInit(): void {
         this.getPost();
     }
 
-
+    /**
+     * on destroy the subscription to the route should end
+     */
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
 
-
-    private getPost() {
+    /**
+     * get the post
+     */
+    private getPost(): void {
         this.sub = this.route.params.subscribe(params => {
             this.id = params['id'];
 
-            this._postService.getPost(this.id).subscribe(
+            this.postService.getPost(this.id).subscribe(
                 data => {
                     this.post = data;
                     this.getComments();
@@ -55,53 +72,67 @@ export class PostViewComponent implements OnInit, OnDestroy {
         });
     }
 
-
-    private getComments() {
-        this._commentService.getComments(this.post._id).subscribe(
+    /**
+     * get the comments
+     */
+    private getComments(): void {
+        this.commentService.getComments(this.post._id).subscribe(
             data => {
                 this.comments = data;
             }
         );
     }
 
-
+    /**
+     * if the post is selected for editing update it
+     * else select it for editing
+     */
     private updatePost(): void {
         if (this.editPost) {
             this.editPost = false;
-            this._postService.updatePost(this.post).subscribe();
+            this.postService.updatePost(this.post).subscribe();
         } else {
             this.editPost = true;
         }
     }
 
-
+    /**
+     * change the status of the post to closed
+     */
     private closePost(): void {
         this.post.status = 'closed';
-        this._postService.updatePost(this.post).subscribe();
+        this.postService.updatePost(this.post).subscribe();
     }
 
-
+    /**
+     * delete the post
+     */
     private deletePost() {
-        this._postService.deletePost(this.post._id).subscribe();
+        this.postService.deletePost(this.post._id).subscribe();
 
         this.router.navigate(['/']);
     }
 
-
+    /**
+     * create a new comment to the post
+     * @param text the text of the new comment
+     */
     private createComment(text: string): void {
         const comment: Comment = new Comment();
         comment.postId = this.post._id;
         comment.text = text;
 
-        this._commentService.createComment(comment).subscribe(
+        this.commentService.createComment(comment).subscribe(
             data => {
                 this.getComments();
             }
         );
     }
 
-
-    // TODO: refactor!!!
+    /**
+     * update a comment
+     * @param id the id of the comment to update
+     */
     private updateComment(id: string): void {
         if (this.editComment) {
             this.editComment = false;
@@ -114,16 +145,19 @@ export class PostViewComponent implements OnInit, OnDestroy {
                 }
             });
 
-            this._commentService.updateComment(comment).subscribe();
+            this.commentService.updateComment(comment).subscribe();
         } else {
             this.editComment = true;
             this.editId = id;
         }
     }
 
-
+    /**
+     * delete a comment
+     * @param id the id of the comment to be deleted
+     */
     private deleteComment(id: string): void {
-        this._commentService.deleteComment(id).subscribe();
+        this.commentService.deleteComment(id).subscribe();
 
         this.getComments();
     }

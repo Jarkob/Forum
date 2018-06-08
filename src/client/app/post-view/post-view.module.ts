@@ -1,3 +1,6 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
     MatCardModule,
     MatDividerModule,
@@ -6,14 +9,14 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatMenuModule
- } from '@angular/material';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+    MatMenuModule } from '@angular/material';
+
 import { PostViewRoutingModule } from './post-view-routing.module';
 import { PostViewComponent } from './post-view.component';
-import { FormsModule } from '@angular/forms';
 
+/**
+ * contains everything to display the topic view
+ */
 @NgModule({
     imports: [
         PostViewRoutingModule,
