@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AuthenticationService } from './../services/authentication.service';
 import { UserService } from './../services/user.service';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { GlobalsService } from './globals.service';
 import { MaterialModule } from './material.module';
 import { CommentService } from '../services/comment.service';
@@ -25,8 +24,8 @@ import { TopicService } from '../services/topic.service';
     ReactiveFormsModule,
     MaterialModule
   ],
-  declarations: [ToolbarComponent, NavbarComponent],
-  exports: [ToolbarComponent, NavbarComponent,
+  declarations: [ToolbarComponent],
+  exports: [ToolbarComponent,
     CommonModule, FormsModule, RouterModule,
     ReactiveFormsModule,
     MaterialModule],
