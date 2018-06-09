@@ -1,5 +1,7 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from './../../classes/user';
@@ -10,14 +12,24 @@ import { User } from './../../classes/user';
     templateUrl: 'toolbar.component.html',
     styleUrls: ['toolbar.component.css']
 })
-export class ToolbarComponent implements OnChanges {
+export class ToolbarComponent implements OnInit, OnChanges {
 
-    private isLoggedIn: boolean;
+    private loggedIn: boolean;
     private currentUser: User;
 
-    constructor(private location: Location, public authenticationService: AuthenticationService) {
-        this.isLoggedIn = this.authenticationService.isLoggedIn();
+    constructor(
+        private location: Location,
+        private router: Router,
+        public authenticationService: AuthenticationService) {
         this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
+    }
+
+    ngOnInit(): void {
+        this.router.events.subscribe(
+            event => {
+                this.loggedIn = !(this.location.path().endsWith('/login') || this.location.path().endsWith('/register'));
+            }
+        );
     }
 
     public navigateBack() {
@@ -29,12 +41,12 @@ export class ToolbarComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.isLoggedIn = this.authenticationService.isLoggedIn();
         this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
+        this.loggedIn = !(this.location.path().endsWith('/login') || this.location.path().endsWith('/register'));
     }
 
     public logout() {
         this.authenticationService.logout();
-        console.log('logged out');
+        this.router.navigateByUrl('/login');
     }
 }

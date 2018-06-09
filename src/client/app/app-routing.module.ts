@@ -1,3 +1,4 @@
+import { AuthenticationGuardService } from './services/authentication-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -13,13 +14,14 @@ import { PostViewComponent } from './post-view/post-view.component';
       /* define app module routes here, e.g., to lazily load a module
          (do not place feature module routes here, use an own -routing.module.ts in the feature instead)
        */
-      { path: '', component: TopicOverviewComponent },
-      { path: 'topic-overview', component: TopicOverviewComponent },
-      { path: 'topic-view', component: TopicViewComponent },
-      { path: 'topic-view/:id', component: TopicViewComponent },
-      { path: 'post-view/:id', component: PostViewComponent },
+      { path: '', component: TopicOverviewComponent, canActivate: [AuthenticationGuardService] },
+      { path: 'topic-overview', component: TopicOverviewComponent, canActivate: [AuthenticationGuardService] },
+      { path: 'topic-view', component: TopicViewComponent, canActivate: [AuthenticationGuardService] },
+      { path: 'topic-view/:id', component: TopicViewComponent, canActivate: [AuthenticationGuardService] },
+      { path: 'post-view/:id', component: PostViewComponent, canActivate: [AuthenticationGuardService] },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: '**', redirectTo: '' }
     ])
   ],
   exports: [RouterModule]

@@ -13,6 +13,8 @@ import { User } from '../classes/user';
 @Injectable()
 export class AuthenticationService {
 
+    public loggedIn = false;
+
     /**
      * initialize service
      * @param http
@@ -33,7 +35,10 @@ export class AuthenticationService {
         return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
         .pipe(
             tap(
-                data => {this.setSession(data); }
+                data => {
+                    this.setSession(data);
+                    this.loggedIn = true;
+                }
             )
         );
     }
@@ -61,6 +66,7 @@ export class AuthenticationService {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('expires_at');
         sessionStorage.removeItem('current_user');
+        this.loggedIn = false;
     }
 
     /**

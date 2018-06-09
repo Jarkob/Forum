@@ -1,3 +1,4 @@
+import { AuthenticationGuardService } from './../services/authentication-guard.service';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -44,7 +45,8 @@ export class SharedModule {
         PostService,
         TopicService,
         UserService,
-        AuthenticationService
+        AuthenticationService,
+        AuthenticationGuardService
       ]
     };
   }

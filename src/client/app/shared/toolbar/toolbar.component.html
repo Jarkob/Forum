@@ -6,13 +6,10 @@
         <mat-icon>arrow_forward_ios</mat-icon>
     </button>
 
-    <span [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Forum</span>
-
-    <!-- <span [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Topics</span> -->
-
-    <span *ngIf="!this.isLoggedIn" [routerLink]="['/login']">Login</span>
-    <span *ngIf="this.isLoggedIn" (click)="logout()">Logout</span>
-    <span *ngIf="!this.isLoggedIn" [routerLink]="['/register']">Register</span>
+    <span *ngIf="this.loggedIn" [routerLink]="['/topic-overview']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Forum</span>
+    <span *ngIf="!this.loggedIn" [routerLink]="['/login']">Login</span>
+    <span *ngIf="!this.loggedIn" [routerLink]="['/register']">Register</span>
+    <span *ngIf="this.loggedIn" (click)="logout()">Logout</span>
 
     <span *ngIf="this.currentUser">
         Hallo {{ this.currentUser.username }}!
