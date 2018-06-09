@@ -7,15 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { RegisterModule } from './register/register.module';
-import { LoginModule } from './login/login.module';
-import { TopicViewModule } from './topic-view/topic-view.module';
-import { TopicService } from './services/topic.service';
-import { PostService } from './services/post.service';
-import { CommentService } from './services/comment.service';
-import { TopicOverviewModule } from './topic-overview/topic-overview.module';
-import { PostViewModule } from './post-view/post-view.module';
 import { AuthenticationInterceptor } from './services/authentication.interceptor';
+import { TopicOverviewComponent } from './topic-overview/topic-overview.component';
+import { LoginComponent } from './login/login.component';
+import { PostViewComponent } from './post-view/post-view.component';
+import { TopicViewComponent } from './topic-view/topic-view.component';
+import { RegisterComponent } from './register/register.component';
 
 // import 'hammerjs';
 
@@ -25,22 +22,21 @@ import { AuthenticationInterceptor } from './services/authentication.interceptor
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    TopicOverviewModule,
-    TopicViewModule,
-    PostViewModule,
-    LoginModule,
-    RegisterModule,
     BrowserAnimationsModule,
     SharedModule.forRoot()
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    PostViewComponent,
+    TopicOverviewComponent,
+    TopicViewComponent,
+    LoginComponent,
+    RegisterComponent
+  ],
   providers: [{
     provide: APP_BASE_HREF,
     useValue: '<%= APP_BASE %>',
   },
-    CommentService,
-    PostService,
-    TopicService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
