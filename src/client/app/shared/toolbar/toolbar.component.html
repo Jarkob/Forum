@@ -1,28 +1,34 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button (click)="navigateBack()">
+    <a mat-icon-button (click)="navigateBack()" matTooltip="back">
         <mat-icon>arrow_back_ios</mat-icon>
-    </button>
-    <button mat-icon-button (click)="navigateForward()">
+    </a>
+    <a mat-icon-button (click)="navigateForward()" matTooltip="forward">
         <mat-icon>arrow_forward_ios</mat-icon>
-    </button>
+    </a>
 
-    <span *ngIf="this.loggedIn" [routerLink]="['/topic-overview']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Forum</span>
-    <span *ngIf="!this.loggedIn" [routerLink]="['/login']">Login</span>
-    <span *ngIf="!this.loggedIn" [routerLink]="['/register']">Register</span>
-    <span *ngIf="this.loggedIn" (click)="logout()">Logout</span>
+    <a mat-icon-button *ngIf="this.loggedIn" [routerLink]="['/topic-overview']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">Forum</a>
+    <a mat-icon-button *ngIf="!this.loggedIn" [routerLink]="['/login']" matTooltip="login">
+        <mat-icon>input</mat-icon>
+    </a>
+    <a mat-icon-button *ngIf="!this.loggedIn" [routerLink]="['/register']" matTooltip="register">
+        <mat-icon>how_to_reg</mat-icon>
+    </a>
+    <a mat-icon-button *ngIf="this.loggedIn" (click)="logout()" matTooltip="logout">
+        <mat-icon>power_settings_new</mat-icon>
+    </a>
 
     <span *ngIf="this.currentUser">
         Hallo {{ this.currentUser.username }}!
     </span>
 
-    <button class="more" mat-icon-button [matMenuTriggerFor]="menu">
+    <button class="more" mat-icon-button [matMenuTriggerFor]="menu" matTooltip="menu">
         <!-- <mat-icon>more_vert</mat-icon> -->
         <mat-icon>menu</mat-icon>
         <!-- <mat-icon>settings</mat-icon> -->
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
-        <button mat-menu-item [routerLink]="['/impressum']">
+        <a mat-menu-item [routerLink]="['/impressum']">
             Impressum
-        </button>
+        </a>
     </mat-menu>
 </mat-toolbar>

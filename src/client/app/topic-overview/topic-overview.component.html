@@ -5,11 +5,11 @@
             <p>
                 <span>{{ topic.title }}</span>
                 <span class="right">
-                    <button mat-fab color="accent" (click)="updateTopic(topic._id)">
+                    <button mat-fab color="accent" (click)="updateTopic(topic._id)" matTooltip="edit">
                         <mat-icon *ngIf="!editTopic || editId != topic._id">edit</mat-icon>
                         <mat-icon *ngIf="editTopic && editId == topic._id">save</mat-icon>
                     </button>
-                    <button mat-fab color="accent" (click)="deleteTopic(topic._id)">
+                    <button mat-fab color="accent" (click)="deleteTopic(topic._id)" matTooltip="delete">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </span>
@@ -25,11 +25,11 @@
                 </mat-form-field>
             </span>
             <span class="right">
-                <button mat-fab color="accent" (click)="updateTopic(topic._id)">
+                <button mat-fab color="accent" (click)="updateTopic(topic._id)" matTooltip="edit">
                     <mat-icon *ngIf="!editTopic || editId != topic._id">edit</mat-icon>
                     <mat-icon *ngIf="editTopic && editId == topic._id">save</mat-icon>
                 </button>
-                <button mat-fab color="accent" (click)="deleteTopic(topic._id)">
+                <button mat-fab color="accent" (click)="deleteTopic(topic._id)" matTooltip="delete">
                     <mat-icon>delete</mat-icon>
                 </button>
             </span>
@@ -38,7 +38,7 @@
 </ul>
 
 <form>
-    <button mat-fab color="accent" (click)="createTopic(newThema.value); newThema.value = null">
+    <button mat-fab color="accent" (click)="createTopic(newThema.value); newThema.value = null" matTooltip="create">
         <mat-icon>add</mat-icon>
     </button>
     <div class="input-container">
