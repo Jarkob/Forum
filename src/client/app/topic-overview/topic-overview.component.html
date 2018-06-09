@@ -35,11 +35,13 @@
 </ul>
 
 <form>
-    <mat-form-field>
-        <input matInput maxlength="100" required #newThema placeholder="Neues Thema">
-        <mat-hint align="end">{{ newThema.value.length }} / 100</mat-hint>
-    </mat-form-field>
     <button mat-fab color="accent" (click)="createTopic(newThema.value); newThema.value = null">
         <mat-icon>add</mat-icon>
     </button>
+    <div class="input-container">
+        <mat-form-field>
+            <input matInput maxlength="100" required #newThema placeholder="Neues Thema">
+            <mat-hint align="end">{{ newThema.value.length }} / 100</mat-hint>
+        </mat-form-field>
+    </div>
 </form>

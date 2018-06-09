@@ -1,22 +1,25 @@
-<form [formGroup]="form">
-    <div>
-        <mat-form-field>
-            <input matInput maxlength="100" required name="username" formControlName="username" placeholder="Username">
-        </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field>
-            <input matInput maxlength="100" required name="email" formControlName="email" placeholder="Email">
-        </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field>
-            <input matInput maxlength="100" required name="password" formControlName="password" placeholder="Password" type="password">
-        </mat-form-field>
-    </div>
-    <div class="center">
-        <button mat-fab color="accent" (click)="register()">
-            <mat-icon>how_to_reg</mat-icon>
-        </button>
-    </div>
-</form>
+<mat-card>
+    <form [formGroup]="form">
+        <h2>Register</h2>
+        <div>
+            <mat-form-field>
+                <input matInput maxlength="100" required name="username" formControlName="username" placeholder="Username">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput maxlength="100" required name="email" formControlName="email" placeholder="Email">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput maxlength="100" required name="password" formControlName="password" placeholder="Password" type="password">
+            </mat-form-field>
+        </div>
+        <div class="center">
+            <button mat-fab color="accent" (click)="register()">
+                <mat-icon>how_to_reg</mat-icon>
+            </button>
+        </div>
+    </form>
+</mat-card>

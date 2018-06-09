@@ -24,9 +24,13 @@ import { TopicService } from '../services/topic.service';
     ReactiveFormsModule,
     MaterialModule
   ],
-  declarations: [ToolbarComponent],
+  declarations: [
+    ToolbarComponent,
+  ],
   exports: [ToolbarComponent,
-    CommonModule, FormsModule, RouterModule,
+    CommonModule,
+    FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     MaterialModule],
 })

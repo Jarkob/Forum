@@ -1,7 +1,8 @@
-import { User } from './../../classes/user';
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
+
 import { AuthenticationService } from '../../services/authentication.service';
+import { User } from './../../classes/user';
 
 @Component({
     moduleId: module.id,

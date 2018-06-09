@@ -1,9 +1,4 @@
 .more {
-  /* background: url("./assets/svg/more.svg");
-  float: right;
-  height: 24px;
-  margin-top: 12px;
-  width: 24px; */
   position: absolute;
   right: 0;
 }
