@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { PostViewComponent } from './post-view/post-view.component';
 import { TopicViewComponent } from './topic-view/topic-view.component';
 import { RegisterComponent } from './register/register.component';
+import { ImpressumComponent } from './impressum/impressum.component';
 
 // import 'hammerjs';
 
@@ -31,7 +32,8 @@ import { RegisterComponent } from './register/register.component';
     TopicOverviewComponent,
     TopicViewComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ImpressumComponent
   ],
   providers: [{
     provide: APP_BASE_HREF,

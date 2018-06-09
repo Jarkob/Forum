@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { TopicOverviewComponent } from './topic-overview/topic-overview.component';
 import { TopicViewComponent } from './topic-view/topic-view.component';
 import { PostViewComponent } from './post-view/post-view.component';
+import { ImpressumComponent } from './impressum/impressum.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { PostViewComponent } from './post-view/post-view.component';
       { path: 'post-view/:id', component: PostViewComponent, canActivate: [AuthenticationGuardService] },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'impressum', component: ImpressumComponent},
       { path: '**', redirectTo: '' }
     ])
   ],

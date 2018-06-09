@@ -1,0 +1,8 @@
+:host {
+    width: 50%;
+    margin: 0 auto;
+}
+
+mat-card {
+    margin-top: 1em;
+}
