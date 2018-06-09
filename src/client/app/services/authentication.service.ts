@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-// import { tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -30,12 +30,12 @@ export class AuthenticationService {
      * @param password the password of the user to login
      */
     public login(email: string, password: string): Observable<any> {
-        return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password});
-        // .pipe(
-        //     tap(
-        //         data => {this.setSession(data); }
-        //     )
-        // );
+        return this.http.post<User>(this.globalsService.restUrl + '/login', {email: email, password: password})
+        .pipe(
+            tap(
+                data => {this.setSession(data); }
+            )
+        );
     }
 
     /**
