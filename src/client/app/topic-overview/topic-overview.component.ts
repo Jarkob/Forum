@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { TopicService } from './../services/topic.service';
 import { Topic } from '../classes/topic';
+import { CommentService } from '../services/comment.service';
+import { PostService } from '../services/post.service';
 
 /**
  * an overview of all existing topics
@@ -24,7 +26,11 @@ export class TopicOverviewComponent implements OnInit {
      * initialize component
      * @param topicService to access topic data from the backend
      */
-    constructor(private topicService: TopicService) { }
+    constructor(
+        private topicService: TopicService,
+        private postService: PostService,
+        private commentService: CommentService
+    ) { }
 
     /**
      * on init the component should get an updated version of all topics

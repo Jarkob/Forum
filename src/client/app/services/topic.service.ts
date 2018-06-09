@@ -25,6 +25,8 @@ export class TopicService {
     }
 
     public createTopic(topic: Topic): Observable<Topic> {
+        topic.postCount = 0;
+        topic.lastActivity = new Date();
         return this.http.post<Topic>(this.globalsService.restUrl + '/topics', topic, httpOptions);
     }
 

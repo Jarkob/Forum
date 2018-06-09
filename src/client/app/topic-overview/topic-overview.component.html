@@ -2,16 +2,19 @@
 <ul>
     <li *ngFor="let topic of topics">
         <mat-card *ngIf="!editTopic || editId != topic._id" [routerLink]="['/topic-view', topic._id]">
-            <span>{{ topic.title }}</span>
-            <span class="right">
-                <button mat-fab color="accent" (click)="updateTopic(topic._id)">
-                    <mat-icon *ngIf="!editTopic || editId != topic._id">edit</mat-icon>
-                    <mat-icon *ngIf="editTopic && editId == topic._id">save</mat-icon>
-                </button>
-                <button mat-fab color="accent" (click)="deleteTopic(topic._id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </span>
+            <p>
+                <span>{{ topic.title }}</span>
+                <span class="right">
+                    <button mat-fab color="accent" (click)="updateTopic(topic._id)">
+                        <mat-icon *ngIf="!editTopic || editId != topic._id">edit</mat-icon>
+                        <mat-icon *ngIf="editTopic && editId == topic._id">save</mat-icon>
+                    </button>
+                    <button mat-fab color="accent" (click)="deleteTopic(topic._id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </span>
+            </p>
+            <p>{{ topic.postCount }} Beiträge, letzter Beitrag am {{ topic.lastActivity | date:'full' }}</p>
         </mat-card>
         
         <mat-card *ngIf="editTopic && editId == topic._id">
