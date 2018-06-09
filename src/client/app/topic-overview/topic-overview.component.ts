@@ -46,6 +46,9 @@ export class TopicOverviewComponent implements OnInit {
         this.topicService.getTopics().subscribe(
             data => {
                 this.topics = data;
+                this.topics.sort((a, b) =>
+                    a.lastActivity < b.lastActivity ?
+                    1 : a.lastActivity > b.lastActivity ? -1 : 0);
             }
         );
     }
