@@ -126,7 +126,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
      * delete the post
      */
     private deletePost() {
-        this.postService.deletePost(this.post._id).subscribe();
+        this.postService.deletePost(this.post).subscribe();
 
         this.router.navigate(['/']);
     }

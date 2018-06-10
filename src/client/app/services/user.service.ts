@@ -1,8 +1,12 @@
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user';
 import { GlobalsService } from '../shared/globals.service';
+
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 /**
  * simple crud service for users
@@ -23,7 +27,7 @@ export class UserService {
     }
 
     public create(user: User) {
-        return this.http.post(this.globalsService.restUrl + '/users', user);
+        return this.http.post(this.globalsService.restUrl + '/users', user, httpOptions);
     }
 
     public update(user: User) {

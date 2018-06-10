@@ -44,7 +44,6 @@ export class PostService {
         .pipe(
             tap(
                 data => {
-                    console.log('should be new post with id: ', data);
                     // change topic
                     this.topicService.getTopic(post.topicId).subscribe(
                         topicData => {
@@ -67,10 +66,21 @@ export class PostService {
         return this.http.put<Post>(this.globalsService.restUrl + '/posts/' + post._id, post);
     }
 
-    public deletePost(id: string): Observable<{}> {
-        // change topic
-        // TODO, parameter needs to be edited
-
-        return this.http.delete(this.globalsService.restUrl + '/posts/' + id);
+    public deletePost(post: Post): Observable<{}> {
+        return this.http.delete(this.globalsService.restUrl + '/posts/' + post._id).pipe(
+            tap(
+                data => {
+                    // change topic
+                    this.topicService.getTopic(post.topicId).subscribe(
+                        topicData => {
+                            const updatedTopic: Topic = topicData;
+                            updatedTopic.postCount--;
+                            // lastActivity and lastPostId won't be updated here
+                            this.topicService.updateTopic(updatedTopic).subscribe();
+                        }
+                    );
+                }
+            )
+        );
     }
 }
