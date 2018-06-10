@@ -1,4 +1,4 @@
-<h2>{{ this.topic?.title }}</h2>
+<h2><a [routerLink]="['/topic-overview']">Themen</a> / {{ this.topic?.title }}</h2>
 
 <ul>
     <li *ngFor="let post of posts">

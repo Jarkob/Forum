@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { TopicService } from './../services/topic.service';
 import { Post } from '../classes/post';
 import { Comment } from './../classes/comment';
 import { CommentService } from '../services/comment.service';
 import { PostService } from '../services/post.service';
+import { Topic } from '../classes/topic';
 
 /**
  * a view a single post showing all belonging comments
@@ -26,6 +28,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private editComment = false;
     private editId: string;
 
+    private topic: Topic;
     private post: Post;
     private comments: Comment[] = [];
 
@@ -33,12 +36,14 @@ export class PostViewComponent implements OnInit, OnDestroy {
      * initialize component
      * @param router for navigationg
      * @param route the active route for access to the postId in the url
+     * @param topicService to access topic data
      * @param postService to access post data
      * @param commentService to access comment data
      */
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+        private topicService: TopicService,
         private postService: PostService,
         private commentService: CommentService) { }
 
@@ -46,7 +51,12 @@ export class PostViewComponent implements OnInit, OnDestroy {
      * on init the post should be loaded
      */
     ngOnInit(): void {
-        this.getPost();
+        this.sub = this.route.params.subscribe(
+            params => {
+                this.id = params['id'];
+                this.getPost();
+            }
+        );
     }
 
     /**
@@ -57,19 +67,27 @@ export class PostViewComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * get the topic
+     */
+    private getTopic(): void {
+        this.topicService.getTopic(this.post.topicId).subscribe(
+            data => {
+                this.topic = data;
+            }
+        );
+    }
+
+    /**
      * get the post
      */
     private getPost(): void {
-        this.sub = this.route.params.subscribe(params => {
-            this.id = params['id'];
-
-            this.postService.getPost(this.id).subscribe(
-                data => {
-                    this.post = data;
-                    this.getComments();
-                }
-            );
-        });
+        this.postService.getPost(this.id).subscribe(
+            data => {
+                this.post = data;
+                this.getTopic();
+                this.getComments();
+            }
+        );
     }
 
     /**

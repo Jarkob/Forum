@@ -3,6 +3,16 @@
     margin: 0 auto;
 }
 
+h2 {
+    margin: 1em 1em 0 1em;
+    padding: 1em 1em 0 1em;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
 ul {
     list-style-type: none;
     padding: 1em;
@@ -12,7 +22,7 @@ input {
     width: 100%;
 }
 
-form, h2 {
+form {
     padding: 1em;
 }
 

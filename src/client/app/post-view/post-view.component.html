@@ -1,3 +1,9 @@
+<h2>
+    <a [routerLink]="['/topic-overview']">Themen</a>
+     / 
+    <a *ngIf="this.topic" [routerLink]="['/topic-view', this.topic?._id]">{{ this.topic?.title }}</a>
+     / {{ this.post?.title }}
+</h2>
 <ul>
     <li>
         <mat-card *ngIf="this.post">

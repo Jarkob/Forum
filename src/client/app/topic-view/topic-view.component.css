@@ -3,6 +3,11 @@
     margin: 0 auto;
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+}
+
 ul {
     list-style-type: none;
     padding: 1em;
@@ -31,12 +36,4 @@ mat-form-field {
 
 form input, form textarea {
     width: 100%;
-}
-
-.right {
-    /* Verzweiflung
-    position: absolute;
-    right: 0;
-    left: auto;
-    display: inline-block; */
 }
