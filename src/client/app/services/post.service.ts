@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { tap } from 'rxjs/operators';
+// import { tap } from 'rxjs/operators';
 
 import { GlobalsService } from './../shared/globals.service';
 import { Post } from '../classes/post';
@@ -40,26 +40,26 @@ export class PostService {
         // set username
         post.username = JSON.parse(sessionStorage.getItem('current_user')).username;
 
-        return this.http.post<Post>(this.globalsService.restUrl + '/posts', post, httpOptions)
-        .pipe(
-            tap(
-                data => {
-                    // change topic
-                    this.topicService.getTopic(post.topicId).subscribe(
-                        topicData => {
-                            const updatedTopic: Topic = topicData;
-                            updatedTopic.postCount++;
-                            updatedTopic.lastActivity = data.postTime;
-                            updatedTopic.lastPostId = data._id;
-                            this.topicService.updateTopic(updatedTopic).subscribe();
-                        },
-                        err => {
-                            console.log(err);
-                        }
-                    );
-                }
-            )
-        );
+        return this.http.post<Post>(this.globalsService.restUrl + '/posts', post, httpOptions);
+        // .pipe(
+        //     tap(
+        //         data => {
+        //             // change topic
+        //             this.topicService.getTopic(post.topicId).subscribe(
+        //                 topicData => {
+        //                     const updatedTopic: Topic = topicData;
+        //                     updatedTopic.postCount++;
+        //                     updatedTopic.lastActivity = data.postTime;
+        //                     updatedTopic.lastPostId = data._id;
+        //                     this.topicService.updateTopic(updatedTopic).subscribe();
+        //                 },
+        //                 err => {
+        //                     console.log(err);
+        //                 }
+        //             );
+        //         }
+        //     )
+        // );
     }
 
     public updatePost(post: Post): Observable<Post> {
@@ -67,20 +67,20 @@ export class PostService {
     }
 
     public deletePost(post: Post): Observable<{}> {
-        return this.http.delete(this.globalsService.restUrl + '/posts/' + post._id).pipe(
-            tap(
-                data => {
-                    // change topic
-                    this.topicService.getTopic(post.topicId).subscribe(
-                        topicData => {
-                            const updatedTopic: Topic = topicData;
-                            updatedTopic.postCount--;
-                            // lastActivity and lastPostId won't be updated here
-                            this.topicService.updateTopic(updatedTopic).subscribe();
-                        }
-                    );
-                }
-            )
-        );
+        return this.http.delete(this.globalsService.restUrl + '/posts/' + post._id);//.pipe(
+        //     tap(
+        //         data => {
+        //             // change topic
+        //             this.topicService.getTopic(post.topicId).subscribe(
+        //                 topicData => {
+        //                     const updatedTopic: Topic = topicData;
+        //                     updatedTopic.postCount--;
+        //                     // lastActivity and lastPostId won't be updated here
+        //                     this.topicService.updateTopic(updatedTopic).subscribe();
+        //                 }
+        //             );
+        //         }
+        //     )
+        // );
     }
 }

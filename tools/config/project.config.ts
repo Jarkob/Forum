@@ -120,7 +120,11 @@ export class ProjectConfig extends SeedConfig {
       {
         name: '@angular/cdk/table',
         path: 'node_modules/@angular/cdk/bundles/cdk-table.umd.js'
-      }
+      },
+      {
+        name: 'rxjs/operators',
+        path: 'node_modules/rxjs/operators/index.js'
+      },
     ];
 
     this.addPackagesBundles(additionalPackages);
