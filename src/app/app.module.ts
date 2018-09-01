@@ -1,3 +1,4 @@
+import { ErrorDialogComponent } from './error/error-dialog.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './login/login.component';
 import { ImpressumComponent } from './impressum/impressum.component';
@@ -32,7 +33,8 @@ import { UserService } from './services/user.service';
     PostViewComponent,
     ImpressumComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,9 @@ import { UserService } from './services/user.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
+  ],
+  entryComponents: [
+    ErrorDialogComponent
   ],
   providers: [
     GlobalsService,

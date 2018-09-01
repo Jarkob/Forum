@@ -1,8 +1,10 @@
+import { ErrorDialogComponent } from './../error/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthenticationService } from '../services/authentication.service';
+import { MatDialog } from '@angular/material';
 
 /**
  * shows a login screen
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
         private fb: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        public dialog: MatDialog
     ) {
         this.form = this.fb.group({
             email: ['', Validators.required],
@@ -66,6 +69,7 @@ export class LoginComponent implements OnInit {
                     },
                     err => {
                         console.log('Error: ', err);
+                        this.dialog.open(ErrorDialogComponent, {data: 'Error ' + err.status + ': ' + err.statusText});
                     }
                 );
         }
