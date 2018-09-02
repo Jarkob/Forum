@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
                         this.router.navigateByUrl(this.returnUrl);
                     },
                     err => {
-                        console.log('Error: ', err);
+                        console.error('Error: ', err);
                         this.dialog.open(ErrorDialogComponent, {data: err});
                     }
                 );
