@@ -1,9 +1,11 @@
+import { MatDialog } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 
 import { TopicService } from './../services/topic.service';
 import { Topic } from '../classes/topic';
 import { CommentService } from '../services/comment.service';
 import { PostService } from '../services/post.service';
+import { ErrorDialogComponent } from '../error/error-dialog.component';
 
 /**
  * an overview of all existing topics
@@ -28,7 +30,8 @@ export class TopicOverviewComponent implements OnInit {
     constructor(
         private topicService: TopicService,
         private postService: PostService,
-        private commentService: CommentService
+        private commentService: CommentService,
+        public dialog: MatDialog
     ) { }
 
     /**
@@ -48,6 +51,9 @@ export class TopicOverviewComponent implements OnInit {
                 this.topics.sort((a, b) =>
                     a.lastActivity < b.lastActivity ?
                     1 : a.lastActivity > b.lastActivity ? -1 : 0);
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -64,6 +70,9 @@ export class TopicOverviewComponent implements OnInit {
         this.topicService.createTopic(topic).subscribe(
             data => {
                 this.getTopics();
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -85,7 +94,12 @@ export class TopicOverviewComponent implements OnInit {
                 }
             });
 
-            this.topicService.updateTopic(topic).subscribe();
+            this.topicService.updateTopic(topic).subscribe(
+                () => {},
+                err => {
+                    this.dialog.open(ErrorDialogComponent, {data: err});
+                }
+            );
         } else {
             this.editTopic = true;
             this.editId = topicId;
@@ -103,6 +117,9 @@ export class TopicOverviewComponent implements OnInit {
         this.topicService.deleteTopic(id).subscribe(
             data => {
                 this.getTopics();
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }

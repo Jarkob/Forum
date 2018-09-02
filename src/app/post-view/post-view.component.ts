@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,6 +8,7 @@ import { Comment } from './../classes/comment';
 import { CommentService } from '../services/comment.service';
 import { PostService } from '../services/post.service';
 import { Topic } from '../classes/topic';
+import { ErrorDialogComponent } from '../error/error-dialog.component';
 
 /**
  * a view a single post showing all belonging comments
@@ -44,7 +46,8 @@ export class PostViewComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private topicService: TopicService,
         private postService: PostService,
-        private commentService: CommentService) { }
+        private commentService: CommentService,
+        public dialog: MatDialog) { }
 
     /**
      * on init the post should be loaded
@@ -72,6 +75,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
         this.topicService.getTopic(this.post.topicId).subscribe(
             data => {
                 this.topic = data;
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -85,6 +91,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
                 this.post = data;
                 this.getTopic();
                 this.getComments();
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -96,6 +105,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
         this.commentService.getComments(this.post._id).subscribe(
             data => {
                 this.comments = data;
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -107,7 +119,12 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private updatePost(): void {
         if (this.editPost) {
             this.editPost = false;
-            this.postService.updatePost(this.post).subscribe();
+            this.postService.updatePost(this.post).subscribe(
+                () => {},
+                err => {
+                    this.dialog.open(ErrorDialogComponent, {data: err});
+                }
+            );
         } else {
             this.editPost = true;
         }
@@ -118,14 +135,24 @@ export class PostViewComponent implements OnInit, OnDestroy {
      */
     private closePost(): void {
         this.post.status = 'closed';
-        this.postService.updatePost(this.post).subscribe();
+        this.postService.updatePost(this.post).subscribe(
+            () => {},
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
+            }
+        );
     }
 
     /**
      * delete the post
      */
     private deletePost() {
-        this.postService.deletePost(this.post).subscribe();
+        this.postService.deletePost(this.post).subscribe(
+            () => {},
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
+            }
+        );
 
         this.router.navigate(['/']);
     }
@@ -142,6 +169,9 @@ export class PostViewComponent implements OnInit, OnDestroy {
         this.commentService.createComment(comment).subscribe(
             data => {
                 this.getComments();
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -162,7 +192,12 @@ export class PostViewComponent implements OnInit, OnDestroy {
                 }
             });
 
-            this.commentService.updateComment(comment).subscribe();
+            this.commentService.updateComment(comment).subscribe(
+                () => {},
+                err => {
+                    this.dialog.open(ErrorDialogComponent, {data: err});
+                }
+            );
         } else {
             this.editComment = true;
             this.editId = id;
@@ -174,7 +209,12 @@ export class PostViewComponent implements OnInit, OnDestroy {
      * @param id the id of the comment to be deleted
      */
     private deleteComment(id: string): void {
-        this.commentService.deleteComment(id).subscribe();
+        this.commentService.deleteComment(id).subscribe(
+            () => {},
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
+            }
+        );
 
         this.getComments();
     }

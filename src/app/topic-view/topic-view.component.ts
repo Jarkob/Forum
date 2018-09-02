@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -5,6 +6,7 @@ import { Topic } from '../classes/topic';
 import { TopicService } from '../services/topic.service';
 import { Post } from '../classes/post';
 import { PostService } from './../services/post.service';
+import { ErrorDialogComponent } from '../error/error-dialog.component';
 
 /**
  * an overview of a single existing topic showing all posts
@@ -32,7 +34,9 @@ export class TopicViewComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private topicService: TopicService,
-        private postService: PostService) { }
+        private postService: PostService,
+        public dialog: MatDialog
+    ) { }
 
     /**
      * on init the component should get the fitting topic and all contained posts
@@ -60,6 +64,9 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         this.topicService.getTopic(this.id).subscribe(
             data => {
                 this.topic = data;
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -71,6 +78,9 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         this.postService.getPosts(this.id).subscribe(
             data => {
                 this.posts = data;
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
@@ -90,6 +100,9 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         this.postService.createPost(post).subscribe(
             data => {
                 this.getPosts();
+            },
+            err => {
+                this.dialog.open(ErrorDialogComponent, {data: err});
             }
         );
     }
