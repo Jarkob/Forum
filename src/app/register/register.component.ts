@@ -1,9 +1,11 @@
+import { MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from './../services/user.service';
 import { User } from '../classes/user';
+import { ErrorDialogComponent } from '../error/error-dialog.component';
 
 /**
  * shows a register page
@@ -30,7 +32,8 @@ export class RegisterComponent {
         private formBuilder: FormBuilder,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private userService: UserService
+        private userService: UserService,
+        public dialog: MatDialog
     ) {
         this.form = this.formBuilder.group({
             username: ['', Validators.required],
@@ -57,6 +60,10 @@ export class RegisterComponent {
                 () => {
                     console.log('user was created');
                     this.router.navigateByUrl('/login');
+                },
+                err => {
+                    console.log('Error: ', err);
+                    this.dialog.open(ErrorDialogComponent, {data: err});
                 }
             );
         }

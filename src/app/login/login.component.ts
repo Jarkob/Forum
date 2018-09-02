@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
                     },
                     err => {
                         console.log('Error: ', err);
-                        this.dialog.open(ErrorDialogComponent, {data: 'Error ' + err.status + ': ' + err.statusText});
+                        this.dialog.open(ErrorDialogComponent, {data: err});
                     }
                 );
         }
