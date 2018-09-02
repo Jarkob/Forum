@@ -24,14 +24,14 @@ export class PostViewComponent implements OnInit, OnDestroy {
     private id: string;
     private sub: any;
 
-    private editPost = false;
+    public editPost = false;
 
-    private editComment = false;
-    private editId: string;
+    public editComment = false;
+    public editId: string;
 
-    private topic: Topic;
-    private post: Post;
-    private comments: Comment[] = [];
+    public topic: Topic;
+    public post: Post;
+    public comments: Comment[] = [];
 
     /**
      * initialize component
