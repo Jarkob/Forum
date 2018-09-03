@@ -28,6 +28,7 @@ export class CommentService {
 
         // set username
         comment.username = JSON.parse(sessionStorage.getItem('current_user')).username;
+        comment.userId = JSON.parse(sessionStorage.getItem('current_user'))._id;
 
         return this.http.post<Comment>(this._globalsService.restUrl + '/comments', comment, httpOptions);
     }
