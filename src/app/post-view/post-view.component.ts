@@ -148,7 +148,15 @@ export class PostViewComponent implements OnInit, OnDestroy {
      */
     private deletePost() {
         this.postService.deletePost(this.post).subscribe(
-            () => {},
+            () => {
+                this.topic.postCount--;
+                this.topicService.updateTopic(this.topic).subscribe(
+                    () => {},
+                    err => {
+                        this.dialog.open(ErrorDialogComponent, {data: err});
+                    }
+                );
+            },
             err => {
                 this.dialog.open(ErrorDialogComponent, {data: err});
             }
