@@ -1,12 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { GlobalsService } from './globals.service';
 import { Post } from '../classes/post';
 import { Topic } from '../classes/topic';
 import { TopicService } from './topic.service';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -39,6 +39,7 @@ export class PostService {
 
         // set username
         post.username = JSON.parse(sessionStorage.getItem('current_user')).username;
+        post.userId = JSON.parse(sessionStorage.getItem('current_user'))._id;
 
         return this.http.post<Post>(this.globalsService.restUrl + '/posts', post, httpOptions)
         .pipe(
