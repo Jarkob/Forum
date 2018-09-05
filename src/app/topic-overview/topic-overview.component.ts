@@ -18,10 +18,10 @@ import { ErrorDialogComponent } from '../error/error-dialog.component';
 })
 export class TopicOverviewComponent implements OnInit {
 
-    private topics: Topic[] = [];
+    topics: Topic[] = [];
 
-    private editTopic = false;
-    private editId: string;
+    editTopic = false;
+    editId: string;
 
     /**
      * initialize component

@@ -19,11 +19,11 @@ import { ErrorDialogComponent } from '../error/error-dialog.component';
 })
 export class TopicViewComponent implements OnInit, OnDestroy {
 
-    private id: string;
+    id: string;
     private sub: any;
 
-    private topic: Topic;
-    private posts: Post[] = [];
+    topic: Topic;
+    posts: Post[] = [];
 
     /**
      * initialize component
