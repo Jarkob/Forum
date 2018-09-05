@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Topic } from '../classes/topic';
 import { GlobalsService } from './globals.service';
-import { Observable } from 'rxjs';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,6 +26,7 @@ export class TopicService {
 
     public createTopic(topic: Topic): Observable<Topic> {
         topic.postCount = 0;
+        topic.userId = JSON.parse(sessionStorage.getItem('current_user'))._id;
         topic.lastActivity = new Date();
         return this.http.post<Topic>(this.globalsService.restUrl + '/topics', topic, httpOptions);
     }
