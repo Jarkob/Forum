@@ -62,7 +62,7 @@ export class TopicOverviewComponent implements OnInit {
      * create a new topic
      * @param title the title of the new topic
      */
-    private createTopic(title: string): void {
+    createTopic(title: string): void {
         const topic: Topic = new Topic();
         topic._id = null;
         topic.title = title;

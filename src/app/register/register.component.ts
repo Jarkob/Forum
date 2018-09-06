@@ -45,7 +45,7 @@ export class RegisterComponent {
     /**
      * create new user
      */
-    private register(): void {
+    register(): void {
         this.loading = true;
 
         const value = this.form.value;

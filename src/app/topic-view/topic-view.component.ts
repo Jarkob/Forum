@@ -90,7 +90,7 @@ export class TopicViewComponent implements OnInit, OnDestroy {
      * @param title the title of the new post
      * @param text the text of the new post
      */
-    private createPost(title: string, text: string): void {
+    createPost(title: string, text: string): void {
         const post: Post = new Post();
         post.title = title;
         post.text = text;

@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     /**
      * login user
      */
-    private login(): void {
+    login(): void {
         this.loading = true;
         const val = this.form.value;
 

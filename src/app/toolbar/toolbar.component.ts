@@ -13,8 +13,8 @@ import { ErrorDialogComponent } from '../error/error-dialog.component';
 })
 export class ToolbarComponent implements OnInit, OnChanges {
 
-    private loggedIn: boolean;
-    private currentUser: User;
+    loggedIn: boolean;
+    currentUser: User;
 
     constructor(
         private location: Location,
