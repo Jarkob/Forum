@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
 export class GlobalsService {
     // restUrl = 'http://localhost:5000/forum';
     // restUrl = 'http://localhost:8080/api';
-    restUrl = 'http://forum-backend.herokuapp.com/api';
+    restUrl = 'https://forum-backend.herokuapp.com/api';
 }
