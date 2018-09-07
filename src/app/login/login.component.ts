@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthenticationService } from '../services/authentication.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSpinner } from '@angular/material';
 
 /**
  * shows a login screen
@@ -64,12 +64,13 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     () => {
                         console.log('User is logged in');
-
+                        this.loading = false;
                         this.router.navigateByUrl(this.returnUrl);
                     },
                     err => {
                         console.error('Error: ', err);
                         this.dialog.open(ErrorDialogComponent, {data: err});
+                        this.loading = false;
                     }
                 );
         }
