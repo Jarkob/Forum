@@ -15,6 +15,13 @@
 <body>
   <app-root>
     <style>
+      .wrapper {
+        height: 960px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       .loader {
           border: 16px solid #f3f3f3;
           border-top: 16px solid #3498db;
@@ -29,7 +36,9 @@
           100% { transform: rotate(360deg); }
       }
     </style>
+    <div class="wrapper">
     <div class="loader">
+    </div>
     </div>
   </app-root>
 </body>
