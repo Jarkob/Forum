@@ -18,3 +18,7 @@ mat-form-field, form input, form textarea {
 .center {
     text-align: center;
 }
+
+mat-spinner {
+    margin: 1em auto;
+}
