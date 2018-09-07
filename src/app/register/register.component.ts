@@ -59,11 +59,13 @@ export class RegisterComponent {
             this.userService.create(user).subscribe(
                 () => {
                     console.log('user was created');
+                    this.loading = false;
                     this.router.navigateByUrl('/login');
                 },
                 err => {
                     console.error('Error: ', err);
                     this.dialog.open(ErrorDialogComponent, {data: err});
+                    this.loading = false;
                 }
             );
         }
