@@ -10,7 +10,7 @@
             <h3>{{ this.post.title }}</h3>
             <i>von {{ this.post.username }} - {{ this.post.postTime | date:'full' }}</i>
             
-            <span class="right-buttons">
+            <span class="right-buttons" *ngIf="this.currentUser._id == this.post.userId">
                 <button [disabled]="this.post.status === 'closed'" mat-fab color="accent" (click)="updatePost()" matTooltip="edit">
                     <mat-icon *ngIf="!editPost">edit</mat-icon>
                     <mat-icon *ngIf="editPost">save</mat-icon>
@@ -41,7 +41,7 @@
                     <p>
                         <i>von {{ comment.username }} - {{ comment.commentTime | date:'full' }}</i>
 
-                        <span class="right">
+                        <span class="right" *ngIf="this.currentUser._id == comment.userId">
                             <button [disabled]="this.post.status === 'closed'" mat-fab color="accent" (click)="updateComment(comment._id)" matTooltip="edit">
                                 <mat-icon *ngIf="!editComment || editId != comment._id">edit</mat-icon>
                                 <mat-icon *ngIf="editComment && editId == comment._id">save</mat-icon>
@@ -66,7 +66,7 @@
             </li>
             <li *ngIf="this.post.status === 'open'">
                 <div class="add-comment">
-                    <button mat-fab color="accent" (click)="createComment(newComment.value); newComment.value = null" matTooltip="comment">
+                    <button mat-fab color="accent" (click)="createComment(newComment.value); newComment.value = null" [disabled]="!newComment.value" matTooltip="comment">
                         <mat-icon>comment</mat-icon>
                     </button>
                     <div class="input-container">

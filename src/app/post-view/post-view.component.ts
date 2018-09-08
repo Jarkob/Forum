@@ -1,5 +1,5 @@
 import { MatDialog } from '@angular/material';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TopicService } from './../services/topic.service';
@@ -9,6 +9,7 @@ import { CommentService } from '../services/comment.service';
 import { PostService } from '../services/post.service';
 import { Topic } from '../classes/topic';
 import { ErrorDialogComponent } from '../error/error-dialog.component';
+import { User } from '../classes/user';
 
 /**
  * a view a single post showing all belonging comments
@@ -19,10 +20,12 @@ import { ErrorDialogComponent } from '../error/error-dialog.component';
     templateUrl: 'post-view.component.html',
     styleUrls: ['post-view.component.css']
 })
-export class PostViewComponent implements OnInit, OnDestroy {
+export class PostViewComponent implements OnInit, OnChanges, OnDestroy {
 
     private id: string;
     private sub: any;
+
+    public currentUser: User;
 
     public editPost = false;
 
@@ -53,12 +56,25 @@ export class PostViewComponent implements OnInit, OnDestroy {
      * on init the post should be loaded
      */
     ngOnInit(): void {
+        this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
+
+        // debug
+        console.log('debug: ', this.currentUser);
+
         this.sub = this.route.params.subscribe(
             params => {
                 this.id = params['id'];
                 this.getPost();
             }
         );
+    }
+
+    /**
+     * update currentUser
+     * @param changes
+     */
+    ngOnChanges(changes: SimpleChanges): void {
+        this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
     }
 
     /**
@@ -204,6 +220,7 @@ export class PostViewComponent implements OnInit, OnDestroy {
                 () => {},
                 err => {
                     this.dialog.open(ErrorDialogComponent, {data: err});
+                    this.getComments();
                 }
             );
         } else {

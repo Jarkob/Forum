@@ -4,7 +4,7 @@
         <mat-card *ngIf="!editTopic || editId != topic._id" [routerLink]="['/topic-view', topic._id]">
             <p>
                 <span>{{ topic.title }}</span>
-                <span class="right">
+                <span class="right" *ngIf="this.currentUser && this.currentUser._id == topic.userId">
                     <button mat-fab color="accent" (click)="updateTopic(topic._id)" matTooltip="edit">
                         <mat-icon *ngIf="!editTopic || editId != topic._id">edit</mat-icon>
                         <mat-icon *ngIf="editTopic && editId == topic._id">save</mat-icon>
@@ -24,7 +24,7 @@
                     <mat-hint align="end">{{ topic.title.length }} / 100</mat-hint>
                 </mat-form-field>
             </span>
-            <span class="right">
+            <span class="right" *ngIf="this.currentUser && this.currentUser._id == topic.userId">
                 <button mat-fab color="accent" (click)="updateTopic(topic._id)" matTooltip="edit">
                     <mat-icon *ngIf="!editTopic || editId != topic._id">edit</mat-icon>
                     <mat-icon *ngIf="editTopic && editId == topic._id">save</mat-icon>

@@ -1,5 +1,6 @@
+import { User } from './../classes/user';
 import { MatDialog } from '@angular/material';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { TopicService } from './../services/topic.service';
 import { Topic } from '../classes/topic';
@@ -16,9 +17,11 @@ import { ErrorDialogComponent } from '../error/error-dialog.component';
     templateUrl: 'topic-overview.component.html',
     styleUrls: ['topic-overview.component.css']
 })
-export class TopicOverviewComponent implements OnInit {
+export class TopicOverviewComponent implements OnInit, OnChanges {
 
     topics: Topic[] = [];
+
+    public currentUser: User;
 
     editTopic = false;
     editId: string;
@@ -38,7 +41,16 @@ export class TopicOverviewComponent implements OnInit {
      * on init the component should get an updated version of all topics
      */
     ngOnInit(): void {
+        this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
         this.getTopics();
+    }
+
+    /**
+     * update currentUser
+     * @param changes
+     */
+    ngOnChanges(changes: SimpleChanges): void {
+        this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
     }
 
     /**
