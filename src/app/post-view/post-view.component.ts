@@ -57,10 +57,6 @@ export class PostViewComponent implements OnInit, OnChanges, OnDestroy {
      */
     ngOnInit(): void {
         this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
-
-        // debug
-        console.log('debug: ', this.currentUser);
-
         this.sub = this.route.params.subscribe(
             params => {
                 this.id = params['id'];
