@@ -12,7 +12,7 @@
             </mat-form-field>
         </div>
         <div class="center">
-            <button mat-fab color="accent" (click)="login()" matTooltip="login">
+            <button [disabled]="loading" mat-fab color="accent" (click)="login()" matTooltip="login">
                 <mat-icon>input</mat-icon>
             </button>
         </div>
