@@ -1,4 +1,4 @@
-<h2>Themen</h2>
+<h2>Topics</h2>
 <ul>
     <li *ngFor="let topic of shownTopics">
         <mat-card *ngIf="!editTopic || editId != topic._id" [routerLink]="['/topic-view', topic._id]">
@@ -14,7 +14,7 @@
                     </button>
                 </span>
             </p>
-            <p>{{ topic.postCount }} Beiträge, letzter Beitrag am {{ topic.lastActivity | date:'full' }}</p>
+            <p>{{ topic.postCount }} posts, last post at {{ topic.lastActivity | date:'full' }}</p>
         </mat-card>
         
         <mat-card *ngIf="editTopic && editId == topic._id">
@@ -45,7 +45,7 @@
     </button>
     <div class="input-container">
         <mat-form-field>
-            <input matInput maxlength="100" required #newThema placeholder="Neues Thema">
+            <input matInput maxlength="100" required #newThema placeholder="New Topic">
             <mat-hint align="end">{{ newThema.value.length }} / 100</mat-hint>
         </mat-form-field>
     </div>

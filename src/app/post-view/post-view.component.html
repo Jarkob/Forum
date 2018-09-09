@@ -1,5 +1,5 @@
 <h2>
-    <a [routerLink]="['/topic-overview']">Themen</a>
+    <a [routerLink]="['/topic-overview']">Topics</a>
      / 
     <a *ngIf="this.topic" [routerLink]="['/topic-view', this.topic?._id]">{{ this.topic?.title }}</a>
      / {{ this.post?.title }}
@@ -29,7 +29,7 @@
             <p *ngIf="!editPost">{{ this.post.text }}</p>
             <p *ngIf="editPost">
                 <mat-form-field class="half-width">
-                    <textarea matInput matTextareaAutosize maxlength="5000" [(ngModel)]="this.post.text" placeholder="Bearbeiten"></textarea>
+                    <textarea matInput matTextareaAutosize maxlength="5000" [(ngModel)]="this.post.text" placeholder="Edit"></textarea>
                     <mat-hint align="end">{{ this.post.text.length }} / 5000</mat-hint>
                 </mat-form-field>
             </p>
@@ -39,7 +39,7 @@
             <li *ngFor="let comment of shownComments">
                 <div class="comment">
                     <p>
-                        <i>von {{ comment.username }} - {{ comment.commentTime | date:'full' }}</i>
+                        <i>by {{ comment.username }} - {{ comment.commentTime | date:'full' }}</i>
 
                         <span class="right" *ngIf="this.currentUser._id == comment.userId">
                             <button [disabled]="this.post.status === 'closed'" mat-fab color="accent" (click)="updateComment(comment._id)" matTooltip="edit">
@@ -57,7 +57,7 @@
                     </p>
                     <p *ngIf="editComment && editId == comment._id">
                         <mat-form-field class="full-width">
-                            <textarea matTextareaAutosize maxlength="2000" matInput [(ngModel)]="comment.text" placeholder="Bearbeiten"></textarea>
+                            <textarea matTextareaAutosize maxlength="2000" matInput [(ngModel)]="comment.text" placeholder="Edit"></textarea>
                             <mat-hint align="end">{{ comment.text.length }} / 2000</mat-hint>
                         </mat-form-field>
                     </p>
@@ -74,7 +74,7 @@
                     </button>
                     <div class="input-container">
                         <mat-form-field>
-                            <textarea matInput maxlength="2000" matTextareaAutosize required #newComment placeholder="Kommentar"></textarea>
+                            <textarea matInput maxlength="2000" matTextareaAutosize required #newComment placeholder="Comment"></textarea>
                             <mat-hint align="end">{{ newComment.value.length }} / 2000</mat-hint>
                         </mat-form-field>
                     </div>

@@ -18,7 +18,7 @@
     </a>
 
     <span *ngIf="this.currentUser">
-        Hallo {{ this.currentUser.username }}!
+        Hello {{ this.currentUser.username }}!
     </span>
 
     <button class="more" mat-icon-button [matMenuTriggerFor]="menu" matTooltip="menu">
@@ -27,8 +27,8 @@
         <!-- <mat-icon>settings</mat-icon> -->
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
-        <a mat-menu-item [routerLink]="['/impressum']">
-            Impressum
+        <a mat-menu-item [routerLink]="['/about']">
+            About
         </a>
     </mat-menu>
 </mat-toolbar>

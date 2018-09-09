@@ -1,4 +1,4 @@
-<h2><a [routerLink]="['/topic-overview']">Themen</a> / {{ this.topic?.title }}</h2>
+<h2><a [routerLink]="['/topic-overview']">Topics</a> / {{ this.topic?.title }}</h2>
 
 <ul>
     <li *ngFor="let post of shownPosts">
@@ -15,14 +15,14 @@
 <form>
     <div>
         <mat-form-field>
-            <input matInput maxlength="100" required #newTitle placeholder="Titel">
+            <input matInput maxlength="100" required #newTitle placeholder="Title">
             <mat-hint align="end">{{ newTitle.value.length }} / 100</mat-hint>
         </mat-form-field>
     </div>
 
     <div>
         <mat-form-field>
-            <textarea matInput matTextareaAutosize maxlength="5000" required #newText placeholder="Inhalt"></textarea>
+            <textarea matInput matTextareaAutosize maxlength="5000" required #newText placeholder="Content"></textarea>
             <mat-hint align="end">{{ newText.value.length }} / 5000</mat-hint>
         </mat-form-field>
     </div>
