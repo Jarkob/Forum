@@ -1,7 +1,7 @@
 <h2><a [routerLink]="['/topic-overview']">Themen</a> / {{ this.topic?.title }}</h2>
 
 <ul>
-    <li *ngFor="let post of posts">
+    <li *ngFor="let post of shownPosts">
         <mat-card [routerLink]="['/post-view', post._id]">
             <div>
                 {{ post.title }} von {{ post.username }} - {{ post.postTime | date:'full' }}
@@ -9,6 +9,8 @@
         </mat-card>
     </li>
 </ul>
+
+<mat-paginator [length]="posts.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="changePage($event)" [showFirstLastButtons]="true"></mat-paginator>
 
 <form>
     <div>

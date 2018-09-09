@@ -1,4 +1,4 @@
-import { MatDialog } from '@angular/material';
+import { MatDialog, PageEvent } from '@angular/material';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -24,6 +24,11 @@ export class TopicViewComponent implements OnInit, OnDestroy {
 
     topic: Topic;
     posts: Post[] = [];
+
+    // for pagination
+    shownPosts: Post[];
+    pageIndex = 0;
+    pageSize = 10;
 
     /**
      * initialize component
@@ -58,6 +63,18 @@ export class TopicViewComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * update pagination
+     * @param event
+     */
+    changePage(event: PageEvent): void {
+        this.pageIndex = event.pageIndex;
+        this.pageSize = event.pageSize;
+        const from = this.pageIndex * this.pageSize;
+        const to = from + this.pageSize;
+        this.shownPosts = this.posts.slice(from, to);
+    }
+
+    /**
      * get the topic
      */
     private getTopic(): void {
@@ -78,6 +95,11 @@ export class TopicViewComponent implements OnInit, OnDestroy {
         this.postService.getPosts(this.id).subscribe(
             data => {
                 this.posts = data;
+
+                // update pagination
+                const from = this.pageIndex * this.pageSize;
+                const to = from + this.pageSize;
+                this.shownPosts = this.posts.slice(from, to);
             },
             err => {
                 this.dialog.open(ErrorDialogComponent, {data: err});
