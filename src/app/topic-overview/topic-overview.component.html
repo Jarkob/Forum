@@ -38,7 +38,7 @@
 </ul>
 
 <form>
-    <button mat-fab color="accent" (click)="createTopic(newThema.value); newThema.value = null" matTooltip="create">
+    <button mat-fab color="accent" (click)="createTopic(newThema.value); newThema.value = null" [disabled]="!newThema.value" matTooltip="create">
         <mat-icon>add</mat-icon>
     </button>
     <div class="input-container">
