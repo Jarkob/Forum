@@ -36,7 +36,7 @@
         </mat-card>
 
         <ul *ngIf="this.post">
-            <li *ngFor="let comment of comments">
+            <li *ngFor="let comment of shownComments">
                 <div class="comment">
                     <p>
                         <i>von {{ comment.username }} - {{ comment.commentTime | date:'full' }}</i>
@@ -63,6 +63,9 @@
                     </p>
                 </div>
                 <mat-divider></mat-divider>
+            </li>
+            <li>
+                <mat-paginator [length]="comments.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="changePage($event)" [showFirstLastButtons]="true"></mat-paginator>
             </li>
             <li *ngIf="this.post.status === 'open'">
                 <div class="add-comment">

@@ -1,4 +1,4 @@
-import { MatDialog } from '@angular/material';
+import { MatDialog, PageEvent } from '@angular/material';
 import { Component, OnInit, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -35,6 +35,11 @@ export class PostViewComponent implements OnInit, OnChanges, OnDestroy {
     public topic: Topic;
     public post: Post;
     public comments: Comment[] = [];
+
+    // for pagination
+    shownComments: Comment[];
+    pageIndex = 0;
+    pageSize = 10;
 
     /**
      * initialize component
@@ -81,6 +86,18 @@ export class PostViewComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /**
+     * update pagination
+     * @param event
+     */
+    changePage(event: PageEvent): void {
+        this.pageIndex = event.pageIndex;
+        this.pageSize = event.pageSize;
+        const from = this.pageIndex * this.pageSize;
+        const to = from + this.pageSize;
+        this.shownComments = this.comments.slice(from, to);
+    }
+
+    /**
      * get the topic
      */
     private getTopic(): void {
@@ -117,6 +134,11 @@ export class PostViewComponent implements OnInit, OnChanges, OnDestroy {
         this.commentService.getComments(this.post._id).subscribe(
             data => {
                 this.comments = data;
+
+                // update pagination
+                const from = this.pageIndex * this.pageSize;
+                const to = from + this.pageSize;
+                this.shownComments = this.comments.slice(from, to);
             },
             err => {
                 this.dialog.open(ErrorDialogComponent, {data: err});
