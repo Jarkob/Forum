@@ -63,7 +63,6 @@ export class TopicOverviewComponent implements OnInit, OnChanges {
      * @param event
      */
     changePage(event: PageEvent): void {
-        // change to current page
         this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
         const from = this.pageIndex * this.pageSize;
@@ -85,7 +84,6 @@ export class TopicOverviewComponent implements OnInit, OnChanges {
                 // update pagination
                 const from = this.pageIndex * this.pageSize;
                 const to = from + this.pageSize;
-                // extract pages to be shown
                 this.shownTopics = this.topics.slice(from, to);
             },
             err => {
