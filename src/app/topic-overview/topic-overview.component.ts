@@ -1,5 +1,5 @@
 import { User } from './../classes/user';
-import { MatDialog } from '@angular/material';
+import { MatDialog, PageEvent } from '@angular/material';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { TopicService } from './../services/topic.service';
@@ -20,6 +20,11 @@ import { ErrorDialogComponent } from '../error/error-dialog.component';
 export class TopicOverviewComponent implements OnInit, OnChanges {
 
     topics: Topic[] = [];
+
+    // for pagination
+    shownTopics: Topic[] = [];
+    pageIndex = 0;
+    pageSize = 10;
 
     public currentUser: User;
 
@@ -54,6 +59,19 @@ export class TopicOverviewComponent implements OnInit, OnChanges {
     }
 
     /**
+     * update pagination
+     * @param event
+     */
+    changePage(event: PageEvent): void {
+        // change to current page
+        this.pageIndex = event.pageIndex;
+        this.pageSize = event.pageSize;
+        const from = this.pageIndex * this.pageSize;
+        const to = from + this.pageSize;
+        this.shownTopics = this.topics.slice(from, to);
+    }
+
+    /**
      * subscribes to the topicService and gets all topics
      */
     private getTopics(): void {
@@ -63,6 +81,12 @@ export class TopicOverviewComponent implements OnInit, OnChanges {
                 this.topics.sort((a, b) =>
                     a.lastActivity < b.lastActivity ?
                     1 : a.lastActivity > b.lastActivity ? -1 : 0);
+
+                // update pagination
+                const from = this.pageIndex * this.pageSize;
+                const to = from + this.pageSize;
+                // extract pages to be shown
+                this.shownTopics = this.topics.slice(from, to);
             },
             err => {
                 this.dialog.open(ErrorDialogComponent, {data: err});
