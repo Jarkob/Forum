@@ -13,13 +13,10 @@
     <a mat-icon-button *ngIf="!this.loggedIn" [routerLink]="['/register']" matTooltip="register">
         <mat-icon>how_to_reg</mat-icon>
     </a>
-    <a mat-icon-button *ngIf="this.loggedIn" (click)="logout()" matTooltip="logout">
-        <mat-icon>power_settings_new</mat-icon>
-    </a>
 
-    <span *ngIf="this.currentUser">
+    <!-- <span *ngIf="this.currentUser">
         Hello {{ this.currentUser.username }}!
-    </span>
+    </span> -->
 
     <button class="more" mat-icon-button [matMenuTriggerFor]="menu" matTooltip="menu">
         <!-- <mat-icon>more_vert</mat-icon> -->
@@ -29,6 +26,10 @@
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
         <a mat-menu-item [routerLink]="['/about']">
             About
+        </a>
+        <a mat-menu-item *ngIf="this.loggedIn" (click)="logout()" matTooltip="logout">
+            <!-- <mat-icon>power_settings_new</mat-icon> -->
+            Logout
         </a>
     </mat-menu>
 </mat-toolbar>
