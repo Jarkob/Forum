@@ -10,7 +10,7 @@
             <li>
                 <mat-card *ngIf="this.post">
                     <h3>{{ this.post.title }}</h3>
-                    <i>von {{ this.post.username }} - {{ this.post.postTime | date:'full' }}</i>
+                    <i>von {{ this.post.username }} - {{ this.post.postTime | date:'medium' }}</i>
                     
                     <span class="right-buttons" *ngIf="this.currentUser._id == this.post.userId">
                         <button [disabled]="this.post.status === 'closed'" mat-fab color="accent" (click)="updatePost()" matTooltip="edit">
@@ -41,7 +41,7 @@
                     <li *ngFor="let comment of shownComments">
                         <div class="comment">
                             <p>
-                                <i>by {{ comment.username }} - {{ comment.commentTime | date:'full' }}</i>
+                                <i>by {{ comment.username }} - {{ comment.commentTime | date:'medium' }}</i>
 
                                 <span class="right" *ngIf="this.currentUser._id == comment.userId">
                                     <button [disabled]="this.post.status === 'closed'" mat-fab color="accent" (click)="updateComment(comment._id)" matTooltip="edit">

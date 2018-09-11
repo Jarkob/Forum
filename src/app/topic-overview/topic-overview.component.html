@@ -16,7 +16,7 @@
                             </button>
                         </span>
                     </p>
-                    <p>{{ topic.postCount }} posts, last post at {{ topic.lastActivity | date:'full' }}</p>
+                    <p>{{ topic.postCount }} posts, last post at {{ topic.lastActivity | date:'medium' }}</p>
                 </mat-card>
                 
                 <mat-card *ngIf="editTopic && editId == topic._id">

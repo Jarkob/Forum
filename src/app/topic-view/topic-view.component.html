@@ -6,7 +6,7 @@
             <li *ngFor="let post of shownPosts">
                 <mat-card [routerLink]="['/post-view', post._id]">
                     <div>
-                        {{ post.title }} von {{ post.username }} - {{ post.postTime | date:'full' }}
+                        {{ post.title }} von {{ post.username }} - {{ post.postTime | date:'medium' }}
                     </div>
                 </mat-card>
             </li>
