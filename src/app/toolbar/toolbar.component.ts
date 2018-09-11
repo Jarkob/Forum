@@ -27,7 +27,8 @@ export class ToolbarComponent implements OnInit, OnChanges {
     ngOnInit(): void {
         this.router.events.subscribe(
             event => {
-                this.loggedIn = !(this.location.path().endsWith('/login') || this.location.path().endsWith('/register'));
+                this.loggedIn = !(this.location.path().endsWith('/login') || this.location.path().endsWith('/register'))
+                    && this.authenticationService.isLoggedIn();
             },
             err => {
                 this.dialog.open(ErrorDialogComponent, {data: err});
@@ -45,7 +46,8 @@ export class ToolbarComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         this.currentUser = JSON.parse(sessionStorage.getItem('current_user'));
-        this.loggedIn = !(this.location.path().endsWith('/login') || this.location.path().endsWith('/register'));
+        this.loggedIn = !(this.location.path().endsWith('/login') || this.location.path().endsWith('/register'))
+            && this.authenticationService.isLoggedIn();
     }
 
     public logout() {
