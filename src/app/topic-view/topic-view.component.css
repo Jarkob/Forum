@@ -1,7 +1,6 @@
-/* :host {
-    width: 75%;
-    margin: 0 auto;
-} */
+:host {
+    height: 100%;
+}
 
 a {
     text-decoration: none;

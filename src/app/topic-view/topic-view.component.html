@@ -1,33 +1,37 @@
-<h2><a [routerLink]="['/topic-overview']">Topics</a> / {{ this.topic?.title }}</h2>
+<div fxLayout="row" fxFill fxLayoutAlign="center">
+    <div fxFlex.lt-sm="100%" fxFlex.gt-sm="75%" fxFlex.gt-lg="50%">
+        <h2><a [routerLink]="['/topic-overview']">Topics</a> / {{ this.topic?.title }}</h2>
 
-<ul>
-    <li *ngFor="let post of shownPosts">
-        <mat-card [routerLink]="['/post-view', post._id]">
+        <ul>
+            <li *ngFor="let post of shownPosts">
+                <mat-card [routerLink]="['/post-view', post._id]">
+                    <div>
+                        {{ post.title }} von {{ post.username }} - {{ post.postTime | date:'full' }}
+                    </div>
+                </mat-card>
+            </li>
+        </ul>
+
+        <mat-paginator [length]="posts.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="changePage($event)" [showFirstLastButtons]="true"></mat-paginator>
+
+        <form>
             <div>
-                {{ post.title }} von {{ post.username }} - {{ post.postTime | date:'full' }}
+                <mat-form-field>
+                    <input matInput maxlength="100" required #newTitle placeholder="Title">
+                    <mat-hint align="end">{{ newTitle.value.length }} / 100</mat-hint>
+                </mat-form-field>
             </div>
-        </mat-card>
-    </li>
-</ul>
 
-<mat-paginator [length]="posts.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="changePage($event)" [showFirstLastButtons]="true"></mat-paginator>
+            <div>
+                <mat-form-field>
+                    <textarea matInput matTextareaAutosize maxlength="5000" required #newText placeholder="Content"></textarea>
+                    <mat-hint align="end">{{ newText.value.length }} / 5000</mat-hint>
+                </mat-form-field>
+            </div>
 
-<form>
-    <div>
-        <mat-form-field>
-            <input matInput maxlength="100" required #newTitle placeholder="Title">
-            <mat-hint align="end">{{ newTitle.value.length }} / 100</mat-hint>
-        </mat-form-field>
+            <button mat-fab color="accent" (click)="createPost(newTitle.value, newText.value); newTitle.value = null; newText.value = null" [disabled]="!newTitle.value || !newText.value">
+                <mat-icon>add</mat-icon>
+            </button>
+        </form>
     </div>
-
-    <div>
-        <mat-form-field>
-            <textarea matInput matTextareaAutosize maxlength="5000" required #newText placeholder="Content"></textarea>
-            <mat-hint align="end">{{ newText.value.length }} / 5000</mat-hint>
-        </mat-form-field>
-    </div>
-
-    <button mat-fab color="accent" (click)="createPost(newTitle.value, newText.value); newTitle.value = null; newText.value = null" [disabled]="!newTitle.value || !newText.value">
-        <mat-icon>add</mat-icon>
-    </button>
-</form>
+</div>

@@ -1,28 +1,30 @@
-<mat-card>
-    <form [formGroup]="form">
-        <h2>Register</h2>
-        <div>
-            <mat-form-field>
-                <input matInput maxlength="100" required #username name="username" formControlName="username" placeholder="Username">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field>
-                <input matInput maxlength="100" required #email name="email" formControlName="email" placeholder="Email">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field>
-                <input matInput maxlength="100" required #password name="password" formControlName="password" placeholder="Password" type="password">
-            </mat-form-field>
-        </div>
-        <div class="center">
-            <button [disabled]="loading || !username.value || !email.value || !password.value" mat-fab color="accent" (click)="register()" matTooltip="register">
-                <mat-icon>how_to_reg</mat-icon>
-            </button>
-        </div>
-        <div class="center">
-            <mat-spinner *ngIf="loading" color="accent" [diameter]="50"></mat-spinner>
-        </div>
-    </form>
-</mat-card>
+<div fxLayout="row" fxFill fxLayoutAlign="center center">
+    <mat-card fxFlex.lt-sm="100%" fxFlex.gt-sm="50">
+        <form [formGroup]="form">
+            <h2>Register</h2>
+            <div>
+                <mat-form-field>
+                    <input matInput maxlength="100" required #username name="username" formControlName="username" placeholder="Username">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput maxlength="100" required #email name="email" formControlName="email" placeholder="Email">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput maxlength="100" required #password name="password" formControlName="password" placeholder="Password" type="password">
+                </mat-form-field>
+            </div>
+            <div class="center">
+                <button [disabled]="loading || !username.value || !email.value || !password.value" mat-fab color="accent" (click)="register()" matTooltip="register">
+                    <mat-icon>how_to_reg</mat-icon>
+                </button>
+            </div>
+            <div class="center">
+                <mat-spinner *ngIf="loading" color="accent" [diameter]="50"></mat-spinner>
+            </div>
+        </form>
+    </mat-card>
+</div>
