@@ -1,10 +1,10 @@
-import { ErrorDialogComponent } from './../error/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 
+import { ErrorDialogComponent } from './../error/error-dialog.component';
 import { AuthenticationService } from '../services/authentication.service';
-import { MatDialog, MatSpinner } from '@angular/material';
 
 /**
  * shows a login screen

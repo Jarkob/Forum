@@ -1,7 +1,7 @@
-import { User } from './../classes/user';
 import { MatDialog, PageEvent } from '@angular/material';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
+import { User } from './../classes/user';
 import { TopicService } from './../services/topic.service';
 import { Topic } from '../classes/topic';
 import { CommentService } from '../services/comment.service';

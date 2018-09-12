@@ -1,6 +1,6 @@
-import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 import { TopicOverviewComponent } from './topic-overview/topic-overview.component';
 import { AuthenticationGuardService } from './services/authentication-guard.service';
 import { TopicViewComponent } from './topic-view/topic-view.component';

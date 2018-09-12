@@ -2,6 +2,7 @@ import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
+
 import { User } from '../classes/user';
 import { AuthenticationService } from '../services/authentication.service';
 import { ErrorDialogComponent } from '../error/error-dialog.component';
