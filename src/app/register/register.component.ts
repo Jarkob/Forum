@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { User } from '../classes/user';
 import { ErrorDialogComponent } from '../error/error-dialog.component';
+import { MessageDialogComponent } from '../message/message-dialog.component';
 
 /**
  * shows a register page
@@ -38,7 +39,8 @@ export class RegisterComponent {
         this.form = this.formBuilder.group({
             username: ['', Validators.required],
             email: ['', Validators.required],
-            password: ['', Validators.required]
+            password: ['', Validators.required],
+            passwordrepeat: ['', Validators.required]
         });
     }
 
@@ -54,20 +56,29 @@ export class RegisterComponent {
         user.email = value.email;
         user.password = value.password;
 
-        if (user.username && user.email && user.password) {
-            console.log('attempt to create user');
-            this.userService.create(user).subscribe(
-                () => {
-                    console.log('user was created');
-                    this.loading = false;
-                    this.router.navigateByUrl('/login');
-                },
-                err => {
-                    console.error('Error: ', err);
-                    this.dialog.open(ErrorDialogComponent, {data: err});
-                    this.loading = false;
-                }
-            );
+        if (user.username && user.email && user.password && value.passwordrepeat) {
+            if (user.password === value.passwordrepeat) {
+                console.log('attempt to create user');
+                this.userService.create(user).subscribe(
+                    () => {
+                        console.log('user was created');
+                        this.loading = false;
+                        this.dialog.open(MessageDialogComponent, {data: 'You were registered, please log in now.'});
+                        this.router.navigateByUrl('/login');
+                    },
+                    err => {
+                        console.error('Error: ', err);
+                        this.dialog.open(ErrorDialogComponent, {data: err});
+                        this.loading = false;
+                    }
+                );
+            } else {
+                this.dialog.open(MessageDialogComponent, {data: 'Your passwords are not matching.'});
+                this.loading = false;
+            }
+        } else {
+            this.dialog.open(MessageDialogComponent, {data: 'Please fill out all form fields!'});
+            this.loading = false;
         }
     }
 }
