@@ -24,6 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthenticationGuardService } from './services/authentication-guard.service';
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
+import { MessageDialogComponent } from './message/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { UserService } from './services/user.service';
     AboutComponent,
     LoginComponent,
     RegisterComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { UserService } from './services/user.service';
     FlexLayoutModule
   ],
   entryComponents: [
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    MessageDialogComponent
   ],
   providers: [
     GlobalsService,
