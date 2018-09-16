@@ -25,6 +25,7 @@ import { AuthenticationGuardService } from './services/authentication-guard.serv
 import { AuthenticationService } from './services/authentication.service';
 import { UserService } from './services/user.service';
 import { MessageDialogComponent } from './message/message-dialog.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MessageDialogComponent } from './message/message-dialog.component';
     LoginComponent,
     RegisterComponent,
     ErrorDialogComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

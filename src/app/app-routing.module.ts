@@ -8,6 +8,7 @@ import { PostViewComponent } from './post-view/post-view.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AboutComponent } from './about/about.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { AboutComponent } from './about/about.component';
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'about', component: AboutComponent},
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuardService] },
       { path: '**', redirectTo: '' }
     ])
   ],

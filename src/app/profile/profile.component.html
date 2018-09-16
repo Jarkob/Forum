@@ -1,0 +1,9 @@
+<div fxLayout="row" fxFill fxLayoutAlign="center center">
+    <mat-card fxFlex.lt-sm="100%" fxFlex.gt-sm="50%">
+        <h2>Profile</h2>
+        <p>Name: {{ currentUser.firstname }} {{ currentUser.lastname }}</p>
+        <p>E-Mail: {{ currentUser.email }}</p>
+        <p>Birthdate: {{ currentUser.birthdate | date:'shortDate' }}</p>
+        <p>Gender: {{ currentUser.gender }}</p>
+    </mat-card>
+</div>
